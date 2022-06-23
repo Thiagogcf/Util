@@ -16,7 +16,7 @@ try:
                 if random.randint(1,50) == 1:
                     pyautogui.leftClick()
                     pyautogui.hotkey('ESC')
-        ale = random.randint(10, 60)
+        ale = random.randint(10, 120)
         print(ale)
         time.sleep(ale)
 
