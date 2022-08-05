@@ -11,8 +11,8 @@ pix = im.load()
 x,y = im.size  # Get the width and hight of the image for iterating over
 f = open('readme.txt',"w")
 f.truncate(0)
-for h in range(0,x,3):
-    for w in range(0,y,3):
+for w in range(0,y,3):
+    for h in range(0,x,3):
         if pix[h,w] < (50, 50, 50, 255):
             print(' @ ', end='')
             f.write(' @ ')
