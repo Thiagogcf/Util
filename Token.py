@@ -1,7 +1,7 @@
 import requests
 import pyperclip
 
-url = 'http://192.168.1.144/SmartCooper/api/Token'
+url = 'http://192.168.1.144/GescooperSmartCoop/api/Token'
 myobj = { 'usuario': 'Infogen',  'senha': 'Inf6459'}
 
 x = requests.post(url, json = myobj)

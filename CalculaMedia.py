@@ -8,10 +8,13 @@ while x!=0:
     y = float(input("insira o peso"))
     falta = falta-y
     z = z + (x * (y/10))
-print("Nota até o momento =",z)
+    print("Nota até o momento =",z)
 
 if falta > 0:
     precisa = 7-z
     nf = precisa/(falta/10)
-    print("Voce precisa de ",precisa," ponto para passar sem exame")
+    mediaprecisa = precisa/(falta/10)
+    if nf < 4:
+        nf = 4
+    print("Voce precisa de ",precisa," ponto para passar sem exame, ou seja",mediaprecisa,"com peso 10")
     print("nota",nf ,"na prova")
