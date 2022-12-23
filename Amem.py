@@ -1,19 +1,26 @@
-import json
-import random
-from googletrans import Translator
-import goslate
+import math
+import pyautogui
 
+def get_shape_vertices(sides, size=100):
+    vertices = []
+    angle = 360 / sides
+    screen_width, screen_height = pyautogui.size()
+    center_x, center_y = screen_width / 2, screen_height / 2
+    for i in range(sides):
+        x = size * math.cos(math.radians(angle * i)) + center_x
+        y = size * math.sin(math.radians(angle * i)) + center_y
+        vertices.append((x, y))
+    return vertices
 
-linguas = open('Txt/linguas.json', encoding="utf8")
-lingua = json.load(linguas)
-tam = len(lingua)
+print(get_shape_vertices(3))  # triangle
+x = get_shape_vertices(7)
 
-gs = goslate.Goslate()
-ale = random.randint(1,tam)
+pyautogui.moveTo(x[0])
+pyautogui.mouseDown()
+for y in x:
+    pyautogui.moveTo(y,duration=.25)
+    for z in x:
+        pyautogui.moveTo(y, duration=.1)
+        pyautogui.moveTo(z, duration=.1)
 
-biblia = open('Txt/bible.txt','r')
-versiculos = biblia.read().split('\n\n')
-num = random.randint(1,versiculos.__len__())
-print("====================================================================")
-print(versiculos[num])
-print("====================================================================")
+pyautogui.mouseUp()

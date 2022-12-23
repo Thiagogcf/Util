@@ -11,7 +11,7 @@ pyautogui.moveTo(sx,sy)
 time.sleep(2)
 # Tk().withdraw()
 # filename = askopenfilename()
-filename = 'Img/Screenshot_10.png'
+filename = 'Img/astronaut-space-13-4k.jpg'
 print(filename)
 im = Image.open(filename) # Can be many different formats.
 pix = im.load()
@@ -20,7 +20,8 @@ x,y = im.size  # Get the width and hight of the image for iterating over
 xa = round(x/2)
 ya = round(y/2)
 resolucao = 5
-for res in range(resolucao,1,-1):
+
+for res in range(resolucao,4,-1):
     for h in range(0,x,res):
         for w in range(0,y,res):
             if pix[h,w] < (150, 150, 150, 255):
