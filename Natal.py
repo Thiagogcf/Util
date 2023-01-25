@@ -1,18 +1,18 @@
-from datetime import datetime, timedelta
+import time
 
-# Get the current date and time
-now = datetime.now()
+# Get the current time
+current_time = time.time()
 
-# Christmas is on December 25th, so we need to find the date of the next December 25th
-if now.month == 12 and now.day == 25:
-    # If it's already Christmas, the next one is next year
-    next_christmas = datetime(now.year + 1, 12, 25)
-else:
-    # Otherwise, the next Christmas is this year
-    next_christmas = datetime(now.year, 12, 25)
+# Set the target time to be the start of the new year
+new_year = time.mktime((2024, 1, 1, 0, 0, 0, 0, 0, 0))
 
-# Calculate the difference between the current date and the next Christmas
-difference = next_christmas - now
+# Calculate the number of seconds until the new year
+seconds_until_new_year = new_year - current_time
 
-# Print the number of days until Christmas
-print(f"There are {difference.days} days until Christmas!")
+#Calculate the percentage of the year that has passed
+current_year = time.gmtime().tm_year
+start_of_year = time.mktime((current_year, 1, 1, 0, 0, 0, 0, 0, 0))
+percentage = (current_time - start_of_year) / seconds_until_new_year * 100
+
+# Print the result
+print(f"There are {seconds_until_new_year} seconds until the new year, {percentage:.2f}% of the year has passed.")

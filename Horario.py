@@ -3,10 +3,11 @@ import time
 from datetime import datetime
 
 inicio = datetime.now().timestamp()
-inicioexpediente = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 7, 44,30).timestamp()
+
+inicioexpediente = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 7, 47,30).timestamp()
 iniciotarde = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 13, 0,00).timestamp()
 iniciohora = datetime.now().time()
-final = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 17, 30, 59).timestamp()
+final = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 17, 32, 59).timestamp()
 final2 = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 12, 5, 59).timestamp()
 while(final>datetime.now().timestamp()):
     print("\n"*10)

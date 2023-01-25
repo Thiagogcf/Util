@@ -38,7 +38,7 @@ movie_name_label.grid(row=0, column=0, padx=10, pady=10)
 movie_name_entry = tk.Entry(root)
 movie_name_entry.grid(row=0, column=1, padx=10, pady=10)
 
-# Add a button to submit the movie name
+# Add a button to submit the movie name\\\\\
 submit_button = tk.Button(root, text="Submit", command=get_movie_info)
 submit_button.grid(row=0, column=2, padx=10, pady=10)
 
