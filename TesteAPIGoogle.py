@@ -1,24 +1,28 @@
 import pyperclip
 
-def split_text(text, max_len):
-    lines = text.split('\n')
-    result = []
-    current_line = ''
-    for line in lines:
-        if len(current_line) + len(line) > max_len:
-            result.append(current_line)
-            current_line = ''
-        if current_line:
-            current_line += '\n'
-        current_line += line
-    if current_line:
-        result.append(current_line)
-    return result
+def split_string(string, max_length):
+    parts = [string[i:i + max_length] for i in range(0, len(string), max_length)]
+    return parts
 
-text = input("Digite o texto a ser dividido: ")
-parts = split_text(text, 2000)
+def store_parts(parts):
+    for i, part in enumerate(parts):
+        part_name = "parte {} #código".format(i + 1)
+        print(part_name + "\n" + part + "\n")
 
-print("Para colar as partes, pressione Enter após cada uma:")
-for part in parts:
+def copy_to_clipboard(part):
     pyperclip.copy(part)
-    input()
+
+def main():
+    arquivo = open("String.txt", "r", encoding="utf-8")
+    string =  arquivo.read()
+    max_length = 2000
+    parts = split_string(string, max_length)
+    store_parts(parts)
+
+    while True:
+        if pyperclip.paste() == "Ctrl + V":
+            part = parts.pop(0)
+            copy_to_clipboard(part)
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,193 @@
+
+PRetFlgEmpresa.Call(&SDTEmpresa)
+PRetParEmp.Call(&EmpParCod1)
+PRetFlagFilialSdt.Call(&SDTNF.NfFilCod ,&FlagFilial)
+
+PCarSdtGerNF.Call(&SDTNF)
+
+Do 'BuscaFlagOperacao'
+
+If &SDTNF.Erros.Count > 0 // se possuir erros, não processa a nota
+    &SDTNF.ProcessarNota = 0
+
+    For &Erro in &SDTNF.Erros
+        Msg(&Erro.DescErro)
+    EndFor
+EndIf
+
+If &SDTNF.ProcessarNota = 1
+    &Processa = 'SIM'
+    PLeMovEstoq.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero, &LeMovEstoque)
+
+
+     If &SDTNF.NotaProdutor.Count > 0
+       for &sdtNfProdutor in &sdtNf.NotaProdutor
+           &SDTNFP = New()
+            &SDTNFP.DatEmis = &SDTNF.NfDatEmis
+            &SDTNFP.FilCod  = &SDTNF.NfFilCod
+            &SDTNFP.NfNumero = &SDTNF.NfNumero
+            If &sdtNfProdutor.NFPChv = ''
+                &SDTNFP.NFPModelo = '04'
+                &SDTNFP.NFPSerie  = &sdtNfProdutor.NFPSerie
+            Else
+                &SDTNFP.NFPChv = &sdtNfProdutor.NFPChv
+                &SDTNFP.NFPModelo = Substr(&sdtNfProdutor.NFPChv,21,2)
+                &SDTNFP.NFPSerie = Val(Substr(&sdtNfProdutor.NFPChv,23,3))
+            EndIf
+            &SDTNFP.NFPDatEmis = &sdtNfProdutor.NFPDatEmis
+            &SDTNFP.NFPNumero = &sdtNfProdutor.NFPNumero
+           Call(PMovEstoqueNFProdutorSalvar, &SDTNFP, &xErro)
+       EndFor
+     EndIF
+
+    // 93795
+    if &EmpParCod1 = 25 and &LeMovEstoque.TemProblemaArredondamento = 1
+
+        //assume-se que é problema de arredondamento somente quando a diferença for de 1 centavo (positivo ou negativo)
+        &dif = &LeMovEstoque.ParcVlrTot.Round(2) - &LeMovEstoque.NfVlrTotal.Round(2)
+        &NfFilCod = &SDTNF.NfFilCod
+        &NFDatEmis = &SDTNF.NfDatEmis
+        &NfNumero = &SDTNF.NfNumero
+        do 'AjustarArredondamentoItem'
+        commit
+    endif
+    // 93795
+
+    If &LeMovEstoque.Processa = 'NAO'
+        PExcMovEstoque.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
+        &Processa = 'NAO'
+    EndIf
+
+    // Verifica se o plano de pagamento é a prazo e gera as parcelas
+    PLePlaPgto.Call(&LeMovEstoque.NfPagCod, &Aux)
+    If &Aux = 2 .and. &LeMovEstoque.TemParcela = 'S' .and. &LeMovEstoque.Processa = 'SIM'
+        Do 'ProcessaParcelas'
+    EndIf
+
+    If &OpeEst76Flag in (2, 3) /*.and. &LeMovEstoque.NfOpeEstMovto in (1,2)*/ //Complemento de ICMS de Saida e Entrada e Nf-e Complementar   sol 76961
+        WVincNotaFiscal.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero, &RetVinc)
+        If &RetVinc = 'NAO' and &OpeEst76Flag in (2)
+            Msg('Informação de referência a nota fiscal de complemento incorreta. Documento não pode ser processado!')
+            &Processa = 'NAO'
+            if &EmpParCod1 = 25
+                PExcMovEstoque.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
+                return
+            EndIf
+        EndIf
+    EndIF
+
+    If &Processa = 'SIM'
+        PLeMovEstoq.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero, &LeMovEstoque)
+
+        PLeDocumento.Call(&LeMovEstoque.NfDocCod, &NroItens, &TipImp)
+
+        Msg('Gerando numero do documento...', Status)
+        PGerNota.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero, &LeMovEstoque.NfDocCod)
+
+        Msg('Numero da nota atualizado...',Status)
+        PCalcRateioBaseIcms.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
+
+        Msg('Numero da nota gerado...', Status)
+//        PAtualMov.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero,1)
+        &ItemParametros                                             = New()
+        &ItemParametros.ItemNotaFiscal.NfFilCod                     = &SDTNF.NfFilCod
+        &ItemParametros.ItemNotaFiscal.NfDatEmis                    = &SDTNF.NfDatEmis
+        &ItemParametros.ItemNotaFiscal.NfNumero                     = &SDTNF.NfNumero
+        &ItemParametros.ItemNotaFiscal.NfSituacao                   = 1
+        &ItemParametros.NaoAtualizarDocto                           = 1 //Tiago Bisol. Sol. 89187
+        PAtualMov.Call(&ItemParametros)
+
+        Msg('Gerando mensagens...', Status)
+        PGeraMen.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
+
+        Msg('Mensagem atualizado...', Status)
+        PGrvMsgIteNf.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
+
+        commit//Tiago Bisol. Sol. 89187
+
+        Msg('Atualizando Caixa...',Status)
+        PGrvLanBan.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
+
+        Msg('Extrato atualizado...', Status)
+        PGrvPrinc.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
+
+        Msg('Documento atualizado...', Status)
+        PGrvSit.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero, 3)
+
+        Msg('Atualizando Financeiro...', Status)
+        PGrvFinanceiro.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
+
+        Msg('Atualizando Contrato...', Status)
+        PAtuMovContPesagem.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
+
+        //INÍCIO 46360
+        If &SDTNF.NfEstTerCod > 0
+            WNFInfoExtra.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero, &SDTRatMovEstoqe)
+        Endif
+
+        If &SDTRatMovEstoqe.RatNumero > 0
+            PGrvSDTRatMovEstoqe.Call(&SDTRatMovEstoqe)
+            PGerExtTerceiro.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero, &ErroGerExtTerceiro)
+        EndIf
+        //FIM 46360
+
+        If &SdtNF.NfContControle > 0
+            Msg('Gerando movimento para o contrato...',Status)
+            PGrvMovContrato(&SdtNF.NfContControle, &SdtNF.NfFilCod, &SdtNF.NfNumero, &SdtNF.NfDatEmis, &SdtNF.FlagContrato, 0, &MovErro)
+            If &MovErro = 1
+                Msg('Erro ao gravar a movimentação no contrato!')
+            EndIf
+
+            If &SDTEmpresa.EmpParCod1 = 14// and &FlagFilial.FilFlag6 = 3 // RGR1
+                PAtuContratoTran.Call(&SdtNF.NfFilCod, &SdtNF.NfDatEmis, &SdtNF.NfNumero)
+            EndIf
+        EndIf
+
+//        If &SDTEmpresa.EmpFlg27 = 1
+//           PAtualizaEscritaFiscal.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero, &EmpParCod1)
+//        EndIf
+
+        If &TipImp = 1
+            Msg("Imprimindo nota..",Status)
+            PImpNota.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
+        Endif
+    EndIf
+EndIf
+msg("", status)
+
+Sub 'ProcessaParcelas'
+    PGravaParc.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &LeMovEstoque.NfOpeEstCod, &SDTNF.NfNumero, &LeMovEstoque.NfPagCod, &LeMovEstoque.NfVlrTotal, &LeMovEstoque.NfQtdDev)
+    PAjustaParc.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &LeMovEstoque.NfOpeEstCod, &SDTNF.NfNumero)
+    TXMovEstoqueFaturas.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero, 'UPD', &ProcessaParcelas)
+    &Processa = 'SIM'
+    If &ProcessaParcelas = 'NAO'
+        WConfirma.Call('Total das parcelas não conferem com o total da nota. Deseja Ajustar?', &Resp)
+        If &Resp = 'SIM'
+            Do 'ProcessaParcelas'
+        Else
+            PExcMovEstoque.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
+            &Processa = 'NAO'
+        EndIf
+    EndIf
+EndSub
+
+Sub 'BuscaFlagOperacao'
+    For Each
+        Where OpeEstCod = &SDTNF.NfOpeEstCod
+        Defined By OpeEstTrf
+        &OpeEst76Flag = OpeEst76Flag
+        Exit
+    EndFor
+EndSub
+
+//93795
+Sub 'AjustarArredondamentoItem'
+    for each
+        Where NfFilCod = &NfFilCod
+        Where NfDatEmis = &NfDatEmis
+        Where NfNumero = &NfNumero
+        defined by ItemTotInf
+        ItemTotInf = ItemTotInf + &dif
+        exit
+    endfor
+Endsub
