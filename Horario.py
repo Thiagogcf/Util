@@ -2,11 +2,11 @@ import ctypes
 import time
 from datetime import datetime
 inicio = datetime.now().timestamp()
-inicioexpediente = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 7, 45,30).timestamp()
+inicioexpediente = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 7, 41,30).timestamp()
 iniciotarde = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 13, 0,00).timestamp()
 iniciohora = datetime.now().time()
 final = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 17, 30, 0).timestamp()
-final2 = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 11, 56, 5).timestamp()
+final2 = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 11, 51, 5).timestamp()
 while(final>datetime.now().timestamp()):
     print("\n"*10)
     print('\033[0m',iniciohora)
