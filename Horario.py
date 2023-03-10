@@ -5,8 +5,8 @@ inicio = datetime.now().timestamp()
 inicioexpediente = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 7, 41,30).timestamp()
 iniciotarde = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 13, 0,00).timestamp()
 iniciohora = datetime.now().time()
-final = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 17, 30, 0).timestamp()
-final2 = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 11, 51, 5).timestamp()
+final = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 17, 43, 0).timestamp()
+final2 = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 11, 56, 5).timestamp()
 while(final>datetime.now().timestamp()):
     print("\n"*10)
     print('\033[0m',iniciohora)
@@ -21,4 +21,5 @@ while(final>datetime.now().timestamp()):
         print('\033[93m',((datetime.now().timestamp()-inicio)*100)/(final2-inicio))
         print('\033[95m',((datetime.now().timestamp()-inicioexpediente)*100)/(final2-inicioexpediente))
     time.sleep(1)
+    
 print(ctypes.windll.user32.MessageBoxW(0, "Barbeiro", "Aviso",0))
