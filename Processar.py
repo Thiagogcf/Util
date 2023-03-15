@@ -4,13 +4,14 @@ import pyautogui
 from pyperclip import copy
 
 file = open("Txt/Gpt", "r", encoding="utf-8")
+pyautogui.PAUSE = 0.2
 def Enviar(texto,continuar=True):
     copy(texto)
     pyautogui.hotkey('ctrl', 'v')
     pyautogui.hotkey('tab')
     pyautogui.hotkey('enter')
     if continuar:
-        time.sleep(2.5)
+        time.sleep(4)
         pyautogui.hotkey('tab')
         pyautogui.hotkey('enter')
         pyautogui.hotkey('shift', 'tab')
@@ -20,10 +21,12 @@ char = 0
 texto = ""
 cont = 1
 input("Pressione |ENTER| para iniciar")
+print("OK...")
 time.sleep(5)
 Enviar("Irei te mandar um texto fragmentado em varias partes")
 for line in file:
-    if (char+len(line))<4080:
+    #if (char+len(line))<4080:
+    if (char+len(line))<8160:
         char += len(line)
         texto += line
     else:

@@ -87,8 +87,8 @@ def play_game():
         x1 += x1_change
         y1 += y1_change
 
-        # Fill the screen with white
-        screen.fill(WHITE)
+        # Fill the screen with BLACK
+        screen.fill(BLACK)
 
         # Draw food
         pygame.draw.rect(screen, GREEN, [foodx, foody, block_size, block_size])
@@ -105,7 +105,8 @@ def play_game():
             if x == x1 and y == y1:
                 game_over()
 
-        our_snake = pygame.draw.rect(screen, BLACK, [x1, y1, block_size, block_size])
+        for segment in snake_list:
+            pygame.draw.rect(screen, RED, [segment[0], segment[1], block_size, block_size])
 
         # Snake and food collision
         if x1 == foodx and y1 == foody:
