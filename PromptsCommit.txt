@@ -1,0 +1,18 @@
+Prompts para o Ai Assinten:
+
+
+Padrão:
+Escreva uma mensagem de commit do Git perspicaz, mas concisa, em uma frase completa no presente do indicativo, para a seguinte diferença, sem precedê-la com qualquer coisa. É importante estar escrito em Pt-Br.
+
+V2:
+Por favor, crie uma mensagem de commit sucinta e informativa em português (PT-BR) para o GitHub, descrevendo as seguintes alterações no projeto.
+
+V3:
+
+Por favor, crie uma mensagem de commit sucinta e informativa em português (PT-BR) para o GitHub, categorizando as alterações por objeto e descrevendo as seguintes alterações no projeto, incluindo a criação ou exclusão de objetos e suas funções, quando aplicável:
+
+[Nome_do_objeto{alterado/deletado/criado}]: [liste as alterações específicas relacionadas ao Objeto 1, como correção de bugs, adição de novos recursos, otimização de código, etc. Se o objeto foi criado, descreva sua função. Se foi excluído, mencione isso.]
+[Nome_do_objeto{alterado/deletado/criado}]: [liste as alterações específicas relacionadas ao Objeto 2, como correção de bugs, adição de novos recursos, otimização de código, etc. Se o objeto foi criado, descreva sua função. Se foi excluído, mencione isso.]
+
+V4:
+Por favor, gere uma mensagem de commit em PT-BR no GitHub com as alterações do projeto, usando este formato sem agrupar objetos: [Nome_do_objeto]: [descreva alterações, função se criado, ou mencione exclusão]
