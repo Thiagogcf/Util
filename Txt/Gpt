@@ -1,65 +1,526 @@
-For as long as I can remember, I’ve been a huge fan of classic animation. As a boy I would collect VHS tapes of animated movies and spend countless days watching them. Whether or not I want to admit it, these films were a huge part of my life.
+For each
+    Where EmpCod = 1
+    defined by EmpRazSocial
+Endfor
 
-Everything changed when I was about nine on one fateful trip to my great grandmother’s house. My great grandmother had an enormous conglomeration of tapes in her attic, complete with an area to view them. By the attic stairs, an old TV sat hooked up to a VHS player with a mattress in front; the perfect place to watch movies. I can recall only a handful of times we went to her house, but one visit sticks out in particular.
+Header
+    print P_EmpRazSocial
+    If &ImpVlrNom <> 1
+        Print P_Cabecalho
+    Else
+        Print P_CabNominal
+    Endif
+End
 
-It’s when I watched that movie.
+&ContBol         = 0
+&TotGerTitVlrNom = 0
+&BolTit.Clear()
+&SdtSubGrupo.Clear()
 
-One evening I was nosing around in her attic, looking through her movie collection for some animated movie I had never seen before. Every title was familiar, and I considered watching FernGully until I noticed a tape resting on the top shelf. It was without a cover, and the only marking on it was a sticker that read “The White Door”. I had never heard of this movie. Excitedly, I popped the video in the player and got comfortable. I had no idea what I was in for.
+&FFilNom = 'TODAS'
+IF &FFilCod <> 99
+    For each
+        Where FilCod = &FFilCod
+        &FFilNom = FilNom
+    EndFor
+EndIf
 
-The movie started off with victorious fanfare and a panning shot of some crimson colored clouds. As the clouds drifted past the screen the music got more and more cheerful until the clouds eventually raced off screen revealing the title of the movie. Placed in the sky were massive golden letters that read “The White Door”. From the looks of the animation and quality of the music, I would guess the movie was made in the late 80′s.
+&FTraNom = 'TODOS'
+IF &FTraCod <> 0
+    For each
+        Where TraCod = &FTraCod
+        &FTraNom = TraNom
+    EndFor
+EndIf
 
-The title sequence faded away and the opening scene began with a small, blonde haired boy wandering through darkness until he came across a massive white door. He stopped before it and gazed upward curiously, examining the colossal entryway. The door opened and heavenly light poured in all around him. With a hand over his eyes, he slowly ventured inside. Harp music presented the scene as the boy crept through the doors. The entire screen was overtaken by bright white light. The scene faded back in to reveal the boy standing in a plateau of white, purple, and pink clouds. He was dressed in a white robe and had very small wings protruding from his back. It was, of course, implied that the boy had died.
+&BanNom = 'TODOS'
+If &FTitBolBanco <> 0
+    For each
+        Where BanCod = &FTitBolBanco
+        &BanNom = BanNom
+    EndFor
+EndIf
 
-I was slightly taken back by this. Why had he died? This concept seemed a little too dark for an animated children’s movie.
+&ConLimNom = 'TODAS'
+If &ConLimCod <> 0
+    For each
+        Where ConLimCod = &ConLimCod
+        &ConLimNom = ConLimNom
+    EndFor
+Else
+    If &SdtContaLimite.Count > 0
+        &ConLimNom = 'LISTA'
+        &C = 0
+        &TitConLimCod() = 0
+        For &SdtContaLimiteItem in &SdtContaLimite
+            &C += 1
+            &TitConLimCod(&C) = &SdtContaLimiteItem.ConLimCod
+        Endfor
+    EndIf
+EndIf
 
-The small angel boy looked around, searching for some explanation as to his whereabouts. The music had long since gone away, and the movie cycled through various shots of the boy slowly walking around looking for any sign that he was not alone. He stopped searching, and looked down at his feet.
+&MovNom = 'TODOS'
+If &NfOpeMovCod <> 0
+    For each
+        Where MovCod = &NfOpeMovCod
+        &MovNom = MovNom
+    EndFor
+EndIf
 
-“I’m all alone,” he said on the verge of tears. “I don’t know where everybody is and I’m all alone!” The boy began crying. “I wanna go home!” he yelled several times, crying more and more with each pitiful shout. His crying was disturbingly realistic. He sat down on the ground and began bawling, “I wanna go home!”
+&TitDocNomDesc = '     0 - TODOS'
+If &TitDocCod <> 0 and &SdtTipDoc.Count = 0
+    For each
+        Where TitDocCod = &TitDocCod
+        &TitDocNomDesc = &TitDocCod.ToString() +' - '+ TitDocNom
+    EndFor
+EndIf
 
-I felt a chill race up my spine. This child was in agony, absolutely alone in what was supposed to be “paradise”.
 
-The boy’s wailing was interrupted when a small brown dog ran by, grabbing his attention. Immediately, his tears were dried and he began to follow the dog, cheering “Chester! I can’t believe you’re here, Chester!” He skipped and laughed as he attempted to catch his pet, but the dog always seemed to be just out of reach. It may have been my imagination, but I noticed something strange in the background. There were clouds decorating the back scenery, blacked out as not to distract the viewer, but some of these soft shapes looked abnormal. As the boy ran, the clouds started to look like distant human silhouettes, silently watching him.
+&VenNome = 'TODOS'
+If &VenCod <> 0
+    For each
+        Where TraCod = &VenCod
+        &VenNome = TraNom
+    EndFor
+EndIf
 
-The boy finally caught up to the dog and leaped forward, hoping to greet him with a loving hug. As soon as the boy touched the animal, he realized that it was merely a cloud that resembled a dog. It burst into little white puffs. He began crying again, this time louder and clearly more heartbroken. He truly was alone. He continued weeping, and did not seem to notice what happened next. A deep voice chimed in, offering this simple statement, “You know he cannot come with you.”
+Do Case
+    Case &TipBoleto = 1     &TipBoletoDes = 'Somente Impressos'
+    Case &TipBoleto = 2     &TipBoletoDes = 'Somente Não Impressos'
+    Case &TipBoleto = 3     &TipBoletoDes = 'Todos'
+EndCase
 
-The screen immediately cut to black, and the film began spewing a gentle noise. It sounded like gears grinding together, but I could only barely hear it.
+If &TipBoleto <> 2
+    &DesSituacao = 'Situação:'
+    Do Case
+        Case &Situacao = 0   &SituacaoDes = 'Financeiro'
+        Case &Situacao = 1   &SituacaoDes = 'Digitada'
+        Case &Situacao = 2   &SituacaoDes = 'Atualizada'
+        Case &Situacao = 3   &SituacaoDes = 'NF Listada'
+        Case &Situacao = 4   &SituacaoDes = 'Cancelado'
+        Case &Situacao = 5   &SituacaoDes = 'O.C. Listada'
+        Case &Situacao = 6   &SituacaoDes = 'Ordem atendida'
+        Case &Situacao = 7   &SituacaoDes = 'Ordem atualizada'
+        Case &Situacao = 8   &SituacaoDes = 'NF-e à Cancelar'
+        Case &Situacao = 9   &SituacaoDes = 'Estorno'
+        Case &Situacao = 10  &SituacaoDes = 'Todas'
+        Case &Situacao = 11  &SituacaoDes = 'NF Atualizada e Listada'
+    EndCase
+EndIf
 
-I really should have turned the TV off at that point. I wanted to so very badly, but I could not move. My legs were glued to the floor and my eyes were transfixed on the screen. I simply had to see what was going to happen next.
+Do Case
+    Case &TitSituac = '9'   &TitSituacDes = 'Todos'
+    Case &TitSituac = 'A'   &TitSituacDes = 'Aberto'
+    Case &TitSituac = 'F'   &TitSituacDes = 'Fechado'
+    Case &TitSituac = 'E'   &TitSituacDes = 'Fechado sem Estorno'
+EndCase
 
-In an instant, the sound of gears cut away and the next scene began. The rich colors were intoxicating, and I found myself gawking at the sheer aesthetic beauty of this bizarre movie. A massive, beautiful tree overlooked a green field and the same angel boy sat underneath it. Harp music was playing, the same as before, but this time it sounded less heavenly. Perhaps it was a sneaking suspicion as to what I was about to behold, but the music seemed foreboding. The “Great Tree” (as the boy called it) was listening to the boy’s woes with great attendance, and spoke back to him. The tree’s voice was… for a lack of a better word, creepy. It makes me shudder just to think about it. I really cannot explain it, it was one of the weirdest things I’ve ever heard. The tree would sway from side to side and speak in a quiet, muffled voice that was almost impossible to fully hear. It sounded like a man’s voice stretched to an impossibly high pitch, but muffled through some thick object. I couldn’t understand a single word he said, but the angel boy heard everything. They shared a seemingly mild conversation as the boy asked simple questions about where he was and what happened to his family. With each of the Great Tree’s responses the boy would lower his head in sadness, as if he were accepting some morbid fact.
+Do Case
+    Case &TitNatSoc = 0   &TitNatSocDes = 'Todos'
+    Case &TitNatSoc = 1   &TitNatSocDes = 'Associado'
+    Case &TitNatSoc = 2   &TitNatSocDes = 'Funcionário'
+    Case &TitNatSoc = 3   &TitNatSocDes = 'Não Associado'
+EndCase
 
-I was curious about the significance of this scene. Was the tree supposed to be God or some other heavenly being? There was no clarification toward any of the pressing questions that perpetually plagued my mind.
+Do Case
+    Case &Ordem = 0     &DesOrdem = 'Banco | Vencto | Nosso Número'
+    Case &Ordem = 1     &DesOrdem = 'Alfabética Cliente/Fornecedor'
+    Case &Ordem = 2     &DesOrdem = 'Código Cliente/Fornecedor'
+    Case &Ordem = 3     &DesOrdem = 'Valor Menor para o Maior'
+    Case &Ordem = 4     &DesOrdem = 'Valor Maior para o Menor'
+    Case &Ordem = 5     &DesOrdem = 'Banco | Emissão | Nosso Número'
+    Case &Ordem = 6     &DesOrdem = 'Vendedor | Banco | Vencto'
+    Case &Ordem = 7     &DesOrdem = 'Vendedor | Alfabética Cliente/Fornecedor'
+    Case &Ordem = 8     &DesOrdem = 'Filial | Banco | Vencto | Nosso Número'
+EndCase
 
-After the Great Tree had answered all of his questions, he began talking continuously. He was babbling on about something that apparently angered him, because the child stood up from where he was seated and slowly walked back from the tree. He wore a look of paranoia, as if he were afraid the tree would lash out toward him at any moment.
+&TipoDoctoVet() = 0
+If &SdtTipDoc.Count > 0
+    &TitDocNomDesc = ''
+    &Tam = &SdtTipDoc.Count
+    CSharp      [!&TipoDoctoVet!] = new int[[!&Tam!]];
+    For &I = 1 to &SdtTipDoc.Count
+        &TipoDoctoVet(&I) = &SdtTipDoc.Item(&I).DocCod
+        If &I = 1
+            &TitDocNomDesc += &SdtTipDoc.Item(&I).DocCod.ToString()
+        Else
+            &TitDocNomDesc += ','+Trim(&SdtTipDoc.Item(&I).DocCod.ToString())
+        Endif
+    EndFor
+EndIf
 
-Suddenly there was a new perspective. The camera gradually zoomed in on a shot of the tree, alone, slowly swaying back and forth. He was talking very calmly, from what I could hear, and his voice sounded foggy and distant. The boy began crying again, his wails heard from off the screen. His weeping slowly evolved into pain induced screams and he was shouting as loud as he could, “Stop it! Please stop! Help me! Help me!" My blood ran cold. This was the sound of a child being beaten.
+if &DatIniBaixa = CtoD('0') and &DatFinBaixa = CtoD('0')
+    For Each
+        Order TitFilCod TitParCodConta TitDatDoc When &FFilCod       <> 99
+        Order TitParCodConta TitDatDoc           When &FFilCod        = 99
+        Where TitFilCod       = &FFilCod         When &FFilCod       <> 99
+        Where TitTraCod       = &FTraCod         When &FTraCod       <> 0
+        Where TitDatDoc      >= &FTitDatDocIni
+        Where TitDatDoc      <= &FTitDatDocFim
+        Where TitDatVct      >= &FTitDatVctIni   When &FTitDatVctIni <> CtoD('0')
+        Where TitDatVct      <= &FTitDatVctFim   When &FTitDatVctFim <> CtoD('0')
+        Where TitConLimCod    = &ConLimCod       When &ConLimCod     <> 0 and &SdtContaLimite.Count = 0
+        Where TitConLimCod   in &TitConLimCod()  When &ConLimCod     = 0 and &SdtContaLimite.Count > 0
+        Where TitDocCod       = &TitDocCod       When &TitDocCod     <> 0 and &SdtTipDoc.Count = 0
+        Where TitDocCod      in &TipoDoctoVet    When &SdtTipDoc.Count > 0
+        Where TitParCodConta  = &ParCodConta     When &ParCodConta   <> 99
+        where TitSituac       = &TitSituac       When &TitSituac     = 'A' or &TitSituac = 'F'
+        where TitSituac       = 'F'              When &TitSituac     = 'E'
+        where TitDatEst.IsEmpty()                When &TitSituac     = 'E'
+        Where TitCarNumDoc    = &NumCarga        When &NumCarga      <> 0
+        Where TitVenCod       = &VenCod          When &VenCod <> 0
+        Where TitTraNat = &TitNatSoc             When &TitNatSoc <> 0
 
-With every passing second the boy was screaming louder, but the tree kept its calm disposition while gently swaying back and forth. I couldn’t see the boy, but hearing him cry for help was unbearable. I was nearly in tears at this point, and I didn’t want to watch any more. I got up to turn off the TV but as soon as I moved the screen went black and started playing the familiar grinding gears noise. This time, it was considerably louder. Amongst the loud metallic sound, I noticed a subtle oddity. I thought I could hear a very quiet voice whispering something, but any indication of this was drowned out by the loud gears.
+        Msg('Carregando boletos... ' + TitNumero.ToString(),status)
+        //RGR 2
+        PCarSdtBolTit.Call(TitFilCod,TitTraCod,TitDocCod,TitNumero,TitSufixo,TitNumSeq,&Today,&BolTit)
 
-What awaited me in the next scene shook me to the core.
+        If &ImpVlrNom = 1 //Imprime valor nominal
+            For &BolTitItem in &BolTit
+                If TitFilCod = &BolTitItem.TitFilCod and TitTraCod = &BolTitItem.TitTraCod and TitDocCod = &BolTitItem.TitDocCod
+                and TitNumero = &BolTitItem.TitNumero and TitSufixo = &BolTitItem.TitSufixo and TitNumSeq = &BolTitItem.TitNumSeq
+                    &BolTitItem.TitSituac = TitSituac
+                    &BolTitItem.TitVlrNom = TitVlrNom
+                EndIf
+            Endfor
+        EndIf
+    EndFor
+else
+    For Each
+        Order TitFilCod TitParCodConta TitDatDoc When &FFilCod       <> 99
+        Order TitParCodConta TitDatDoc           When &FFilCod        = 99
+        Where TitFilCod       = &FFilCod         When &FFilCod       <> 99
+        Where TitTraCod       = &FTraCod         When &FTraCod       <> 0
+        Where TitDatDoc      >= &FTitDatDocIni
+        Where TitDatDoc      <= &FTitDatDocFim
+        Where TitDatVct      >= &FTitDatVctIni   When &FTitDatVctIni <> CtoD('0')
+        Where TitDatVct      <= &FTitDatVctFim   When &FTitDatVctFim <> CtoD('0')
+        Where TitConLimCod    = &ConLimCod       When &ConLimCod     <> 0 and &SdtContaLimite.Count = 0
+        Where TitConLimCod   in &TitConLimCod()  When &ConLimCod     = 0 and &SdtContaLimite.Count > 0
+        Where TitDocCod       = &TitDocCod       When &TitDocCod     <> 0 and &SdtTipDoc.Count = 0
+        Where TitDocCod      in &TipoDoctoVet    When &SdtTipDoc.Count > 0
+        Where TitParCodConta  = &ParCodConta     When &ParCodConta   <> 99
+        where TitSituac       = &TitSituac       When &TitSituac     = 'A' or &TitSituac = 'F'
+        where TitSituac       = 'F'              When &TitSituac     = 'E'
+        where TitDatEst.IsEmpty()                When &TitSituac     = 'E'
+        Where TitCarNumDoc    = &NumCarga        When &NumCarga      <> 0
+        where BxaDatMov      >= &DatIniBaixa     when &DatIniBaixa   <> CtoD('0')     //data inicial periodo de baixas
+        where BxaDatMov      <= &DatFinBaixa     when &DatFinBaixa   <> CtoD('0')     //data final periodo de baixas
+        where BxaDatEst      = CtoD('0')                                             //com estorno efetuado
+        Where TitVenCod       = &VenCod          When &VenCod <> 0
+        Where TitTraNat = &TitNatSoc             When &TitNatSoc <> 0
 
-Without any graceful transition, the next scene forced itself into the movie, as if it was not intended to be there. Distorted music was playing at inconsistent volumes and the entire color scheme was off. Something was seriously wrong.
+        Msg('Carregando boletos... ' + TitNumero.ToString(),status)
+        //RGR 2
+        PCarSdtBolTit.Call(TitFilCod,TitTraCod,TitDocCod,TitNumero,TitSufixo,TitNumSeq,&Today,&BolTit)
 
-Suddenly the music stopped.
+        If &ImpVlrNom = 1 //Imprime valor nominal
+            For &BolTitItem in &BolTit
+                If TitFilCod = &BolTitItem.TitFilCod and TitTraCod = &BolTitItem.TitTraCod and TitDocCod = &BolTitItem.TitDocCod
+                and TitNumero = &BolTitItem.TitNumero and TitSufixo = &BolTitItem.TitSufixo and TitNumSeq = &BolTitItem.TitNumSeq
+                    &BolTitItem.TitSituac = TitSituac
+                    &BolTitItem.TitVlrNom = TitVlrNom
+                EndIf
+            Endfor
+        EndIf
+    EndFor
+endif
 
-The boy was lying on the ground, arms crossed on his chest. His eyes were closed, and his face looked hollow. All around his body, roses perched out of the ground arranged in a neat little circle. The roses grew noticeably quick. In a matter of seconds the roses were a few feet high, but all the while the child did not move.
+//RGR 3
+&BolTit.Sort('TitBolNosNum')
+For &BolTitItem in &BolTit
+    If &BolTitItem.TitNfNumr <> 0
+        &ParcNum = &BolTitItem.TitSufixo.ToNumeric()
+        For Each NfFilCod NfDatEmis NfNumero ParcNum
+            Where NfFilCod    = &BolTitItem.TitFilCod
+            Where NfDatEmis   = &BolTitItem.TitDatDoc
+            Where NfNumero    = &BolTitItem.TitNfNumr
+            Where ParcNum     = &ParcNum
+            Where NFNumCarga  = &NumCarga       When &NumCarga <> 0
 
-There was no life in him.
 
-The only sound was the occasional ominous piano note, punctuating the silence. The roses grew very high but all at once would go back to being small, restarting the cycle. The boy remained motionless.
+            Msg('Lendo documento: '+NfNumero.ToString(),status)
 
-I was horrified. I watched with tear-filled eyes, cupping my hand over my mouth.
+            &BolTitItem.Situacao = NfSituacao
+            &BolTitItem.MovCod   = NfOpeMovCod
+            If &BolTitItem.TitBolNosNum = 0
+                &ConCod = ParConCod
+                Do 'LeConta'
+                For each
+                    Where RatFilCod  = NfFilCod
+                    Where RatDatEmis = NfDatEmis
+                    Where RatNumero  = NfNumero
+                    Where ParcNum    = ParcNum
+                    Defined by ParNossoNr
 
-In the last few seconds of the scene, the tree’s muffled voice broke in, saying something I simply could not understand. Just as abruptly as it began, the scene closed with a cut to black. The same rusty gears made their painful sound, but the noise was unbearably loud and accompanied by a loud sweeping voice. It only lasted for a few seconds, and the entire time I struggled to comprehend what the voice was saying.
+                    Msg('Lendo Nosso Nro.: '+ParNossoNr.ToString(),status)
+                    &BolTitItem.TitBolNosNum  = ParNossoNr
+                    &BolTitItem.TitBolBanco   = &ConBanCod
+                    &BolTitItem.TitBolConta   = &ConCod
+                    &BolTitItem.TitBolConSeq  = &ConSeq
+                    &BolTitItem.TitBolAgencia = &ConAgeCod
+                EndFor
+            EndIf
+        EndFor
+    EndIf
+    If &BolTitItem.TitDatEst <> CtoD('0') and &BolTitItem.Situacao <> 4
+        &BolTitItem.Situacao = 9
+    EndIf
+EndFor
 
-Then, in the last second I knew exactly what it was saying.
 
-“He’s coming.”
+Msg('',status)
 
-The tape reached its end and I was left staring at a blue “stop” screen. I didn’t do anything for a few minutes. The floor was victim to my glazed-over stare. Eventually I came to my senses and sneaked back downstairs. I didn’t want to talk to anybody about this, because I just didn’t want to think about it. I tried to pretend it never happened.
+//RGR 4
 
-I cried myself to sleep that night, and many nights afterward. The feeling was impossible to shake. I still think about that movie, with every detail so vividly etched in the back of my mind.
+&TitVenCod      = 0
+&TitVenNom      = ''
+&TotVenTitNom   = 0
+&ContBolVen     = 0
+&VenAux         = 0
+Do Case
+    Case &Ordem = 0     &BolTit.Sort('TitBolBanco,TitDatVct,TitBolNosNum')
+    Case &Ordem = 1     &BolTit.Sort('TitTraNom,TitDatDoc,TitNumero')
+    Case &Ordem = 2     &BolTit.Sort('TitTraCod,TitDatDoc,TitNumero')
+    Case &Ordem = 3     &BolTit.Sort('TitVlrNom,TitDatDoc,TitNumero')
+    Case &Ordem = 4     &BolTit.Sort('[TitVlrNom],TitDatDoc,TitNumero')
+    Case &Ordem = 5     &BolTit.Sort('TitBolBanco,TitDatDoc,TitBolNosNum')
+    Case &Ordem = 6     &BolTit.Sort('TitVenCod,TitBolBanco,TitDatVct,TitBolNosNum')
+    Case &Ordem = 7     &BolTit.Sort('TitVenCod,TitTraNom,TitDatDoc,TitBolNosNum')
+    Case &Ordem = 8     &BolTit.Sort('TitFilCod,TitBolBanco,TitDatVct,TitBolNosNum')
+EndCase
+For &BolTitItem in &BolTit
+    If ((&TipBoleto <> 2 and &BolTitItem.TitBolNosNum > 0) or (&TipBoleto <> 1 and &BolTitItem.TitBolNosNum = 0)) and
+       ((&BolTitItem.Situacao = &Situacao) or (&BolTitItem.Situacao in (2,3) and &Situacao = 11) or &Situacao = 10) and
+       (&BolTitItem.TitBolBanco = &FTitBolBanco or &FTitBolBanco = 0) and
+        //RGR 5
+       (&BolTitItem.MovCod   = &NfOpeMovCod or &NfOpeMovCod = 0)
 
-Sometimes I wonder if I ever watched it at all. Was I dreaming? Did it ever happen? Occasionally, I wake up in the middle of the night hearing distant whispers. Every single time it’s the same thing.
+//        If (&BolTitItem.TitVenCod <> &TitVenCod and &BolTitItem.TitVenCod > 0 and &VenAux > 0 and &TitVenNom = 'SEM VENDEDOR')
+//            &VenAux = 2
+//        EndIf
+        &TitSit = &BolTitItem.TitSituac
+        If &Ordem in (6,7) and (&BolTitItem.TitVenNom <> &TitVenNom and &TitVenNom <> '')
+            // Print Total
+            &DesTotVendedor = 'Total Vendedor: ' + &TitVenNom.Trim() + ' -->'
+            Print P_Tot_Vendedor
+            &ContBolVen     = 0
+            &TotVenTitNom   = 0
+            Eject
+        EndIf
 
-“He’s coming.”
+        If &Ordem in (6,7) and (&BolTitItem.TitVenNom <> &TitVenNom)
+            // Print Vendedor
+            Print P_Vendedor
+        EndIf
+
+
+        &TitVenCod    = &BolTitItem.TitVenCod
+        &TitVenNom    = &BolTitItem.TitVenNom
+        &TitTraCodAux = &BolTitItem.TitTraCod
+        Do 'LeTransacionador'
+        If &BolTitItem.TitBolNosNum > 0
+            &Imp   = 'Sim'
+            &ImpSN = ' '
+        Else
+            &Imp   = 'Não'
+            &ImpSN = '*'
+        EndIf
+
+        If &BolTitItem.TitBanCod.IsEmpty()
+            &ImpBolEnviado.SetEmpty()
+        Else
+            &ImpBolEnviado = '*'
+        EndIf
+        &NfSituacaoDes = ''
+
+        Do Case
+            Case &BolTitItem.Situacao = 0       &NfSituacaoDes = 'Financeiro'
+            Case &BolTitItem.Situacao = 1       &NfSituacaoDes = 'Digitado'
+            Case &BolTitItem.Situacao = 2       &NfSituacaoDes = 'Atualizado'
+            Case &BolTitItem.Situacao = 3       &NfSituacaoDes = 'NF Listada'
+            Case &BolTitItem.Situacao = 4       &NfSituacaoDes = 'Cancelado'
+            Case &BolTitItem.Situacao = 5       &NfSituacaoDes = 'O.C. Listada'
+            Case &BolTitItem.Situacao = 6       &NfSituacaoDes = 'Ordem atend.'
+            Case &BolTitItem.Situacao = 7       &NfSituacaoDes = 'Ordem atual.'
+            Case &BolTitItem.Situacao = 8       &NfSituacaoDes = 'NF-e à Canc.'
+            Case &BolTitItem.Situacao = 9       &NfSituacaoDes = 'Estorno'
+        EndCase
+
+        &DV = ''
+
+        If &BolTitItem.TitBolBanco = 41
+
+
+            &StrCodAux  =  PadL(TRIM(STR(&BolTitItem.TitBolNosNum)),8,'0')
+
+            //Calcula Digito Verificador
+            PCalcDV10Banrisul.Call(&StrCodAux,&DVMod10)
+
+            &StrCodAux  = &StrCodAux.ToString().Trim().PadLeft(8,'0') + &DVMod10.ToString().Trim()
+
+            PCalcDV11Banrisul.Call(&StrCodAux,8,'NN',&DVInvalido,&Mod10,&DVMod11)
+
+
+            If &DVInvalido = 1
+                &DVMod10 = &Mod10
+            EndIf
+
+            &DV = &DVMod10.ToString().Trim() + &DVMod11.ToString().Trim()
+
+        endIF
+
+        If &ImpResSubGrupo = 1
+            &NfNumero   = &BolTitItem.TitNfNumr
+            &NfFilCod   = &BolTitItem.TitFilCod
+            &NfDatEmis  = &BolTitItem.TitDatDoc
+            &NfForCod   = &BolTitItem.TitTraCod
+            Do 'LeNF'
+
+            &Existe      = 0
+            For &SdtSubGrupoItem in &SdtSubGrupo
+                If &SdtSubGrupoItem.FamCod = &ItemProFamCod AND
+                   &SdtSubGrupoItem.GrpCod = &ItemProGrpCod AND
+                   &SdtSubGrupoItem.SubCod = &ItemProSubCod
+                   &SdtSubGrupoItem.SubValor += &BolTitItem.TitVlrNom
+                   &Existe = 1
+                   Exit
+                Endif
+            EndFor
+
+            If &Existe = 0
+                &SdtSubGrupoItem = New()
+                &SdtSubGrupoItem.FamCod     = &ItemProFamCod
+                &SdtSubGrupoItem.GrpCod     = &ItemProGrpCod
+                &SdtSubGrupoItem.SubCod     = &ItemProSubCod
+                &SdtSubGrupoItem.SubNom     = &ItemProSubNom
+                &SdtSubGrupoItem.SubQtdade  = 0
+                &SdtSubGrupoItem.SubValor   = &BolTitItem.TitVlrNom
+                &SdtSubGrupo.Add(&SdtSubGrupoItem)
+            EndIf
+        EndIf
+
+        If &ImpVlrNom <> 1
+            Print P_Boleto
+        Else
+            Print P_BoletoNominal
+        Endif
+        &TotGerTitVlrNom += &BolTitItem.TitVlrNom
+        &TotVenTitNom    += &BolTitItem.TitVlrNom
+        &TitChpCod  = &BolTitItem.TitChpCod
+        &ContBol         += 1
+        &ContBolVen      += 1
+    EndIf
+EndFor
+
+If &Ordem in (6,7) and &TitVenCod > 0
+    // Print Total
+    Print P_Tot_Vendedor
+    &ContBolVen     = 0
+    &TotVenTitNom   = 0
+EndIf
+
+PRetParEmp.Call(&EmpParCod1)
+Do Case
+    Case &ContBol > 0 and Not &EmpParcod1 in(32,25)
+        Print P_TotGer
+
+    Case &ContBol > 0 and &EmpParcod1 in(32,25)
+        Print P_TotGer1
+EndCase
+
+If &ImpResSubGrupo = 1 and &SdtSubGrupo.Count > 0
+    &TotalSubGrupos = 0
+    Print P_CabResSubGrupo
+    &SdtSubGrupo.Sort('SubNom')
+    For &SdtSubGrupoItem in &SdtSubGrupo
+        &DesSubGrupo    = Trim(Str(&SdtSubGrupoItem.FamCod)) + ' | ' + Trim(Str(&SdtSubGrupoItem.GrpCod)) + ' | ' + Trim(Str(&SdtSubGrupoItem.SubCod)) + ' - ' + Trim(&SdtSubGrupoItem.SubNom)
+        &TotSubGrupo    = &SdtSubGrupoItem.SubValor
+        &TotalSubGrupos += &SdtSubGrupoItem.SubValor
+        Print P_ResSubGrupo
+    Endfor
+    Print P_TotResSubGrupo
+EndIf
+
+NoSkip
+
+&TitChpCod = 0
+&TitVlrNomTot = 0
+&TitChpDesHis =  ''
+&TitVlrNom = 0
+if &ImpResCHP = 1
+
+    print P_ResChpCab
+    &BolTit.Sort('TitChpCod,TitVlrNom')
+
+    For &BolTitItem in &BolTit
+        If &BolTitItem.TitChpCod <> &TitChpCod //and &TitChpCod <> 0
+            if &TitVlrNomTot <> 0
+                Print P_ResChpTot
+            endif
+            &TitVlrNom = 0
+            &TotalRegistro = 0
+        EndIf
+        //If &BolTitItem.TitChpCod <> 0
+            &TitChpCod = &BolTitItem.TitChpCod
+            &TitChpDesHis  = &BolTitItem.TitChpDesHis
+            &TitVlrNom += &BolTitItem.TitVlrNom
+            &TitVlrNomTot  += &BolTitItem.TitVlrNom
+            &TotalRegistro += 1
+        //EndIf
+            &Total += 1
+    EndFor
+
+    if &TitVlrNomTot <> 0
+        Print P_ResChpTot
+
+    EndIF
+
+    Print P_ResChpTotais
+EndIf
+
+Footer
+    print P_EstRelG
+End
+
+Sub 'LeTransacionador'
+    For Each
+        Where TraCod = &TitTraCodAux
+        &TraNom = TraNom
+    EndFor
+EndSub
+
+Sub 'LeConta'
+    &ConSeq    = 0
+    &ConConLev = ''
+    &ConBanCod = 0
+    &ConAgeCod = ''
+    For each
+        where ConCod    = &ConCod
+        &ConSeq    = ConSeq
+        &ConConLev = Trim(ConConLev)
+        &ConBanCod = ConBanCod
+        &ConAgeCod = ConAgeCod
+    EndFor
+EndSub
+
+Sub 'LeNF'
+    For each
+        Where NfFilCod  = &NfFilCod
+        Where NfDatEmis = &NfDatEmis
+        Where NfNumero  = &NfNumero
+        Where NfForCod  = &NfForCod
+        Where ItemProCod > 0
+        Defined by ItemQtdade
+        &ItemProFamCod  = ItemProFamCod
+        &ItemProGrpCod  = ItemProGrpCod
+        &ItemProSubCod  = ItemProSubCod
+        &ItemProSubNom  = ItemProSubNom
+        Exit
+        When None
+            &ItemProFamCod  = 999999
+            &ItemProGrpCod  = 999999
+            &ItemProSubCod  = 999999
+            &ItemProSubNom  = 'OUTROS'
+    EndFor
+EndSub

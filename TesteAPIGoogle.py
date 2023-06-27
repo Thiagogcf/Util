@@ -1,28 +1,12 @@
-import pyperclip
+import pandas as pd
+from pandasai import PandasAI
 
-def split_string(string, max_length):
-    parts = [string[i:i + max_length] for i in range(0, len(string), max_length)]
-    return parts
+# Sample DataFrame
+df = pd.read_csv("Datasets/the_oscar_award.csv")
 
-def store_parts(parts):
-    for i, part in enumerate(parts):
-        part_name = "parte {} #código".format(i + 1)
-        print(part_name + "\n" + part + "\n")
+# Instantiate a LLM
+from pandasai.llm.openai import OpenAI
+llm = OpenAI(api_token="YOUR_API_TOKEN")
 
-def copy_to_clipboard(part):
-    pyperclip.copy(part)
-
-def main():
-    arquivo = open("String.txt", "r", encoding="utf-8")
-    string =  arquivo.read()
-    max_length = 2000
-    parts = split_string(string, max_length)
-    store_parts(parts)
-
-    while True:
-        if pyperclip.paste() == "Ctrl + V":
-            part = parts.pop(0)
-            copy_to_clipboard(part)
-
-if __name__ == "__main__":
-    main()
+pandas_ai = PandasAI(llm, conversational=False)
+pandas_ai(df, prompt='Which are the 5 happiest countries?')
