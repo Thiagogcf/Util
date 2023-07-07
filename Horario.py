@@ -3,13 +3,14 @@ import time
 from datetime import datetime
 inicio = datetime.now().timestamp()
 inicioexpediente = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 7, 33, 0).timestamp()
-iniciotarde = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 12,57, 0).timestamp()
+iniciotarde = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 12,59, 0).timestamp()
 iniciohora = datetime.now().time()
-final = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 17, 22, 0).timestamp()
-final2 = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 11, 45, 59).timestamp()
+final = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 17, 33, 0).timestamp()
+final2 = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 11, 59, 59).timestamp()
 while(final>datetime.now().timestamp()):
     print("\n"*10)
     print('\033[0m',iniciohora)
+
     if 100 >= (((datetime.now().timestamp() - inicio) * 100) / (final2 - inicio)) >= 0:
         print('\033[0m',((datetime.fromtimestamp(final2))-datetime.now()))
     else:

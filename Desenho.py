@@ -19,7 +19,7 @@ pyautogui.PAUSE = 0.001
 x,y = im.size  # Get the width and hight of the image for iterating over
 xa = round(x/2)
 ya = round(y/2)
-resolucao = 5
+resolucao = 10
 
 for res in range(resolucao,4,-1):
     for h in range(0,x,res):
