@@ -1,193 +1,1264 @@
+Index: package.json
+===================================================================
+--- package.json	(revision 2195)
++++ package.json	(working copy)
+@@ -72,8 +72,6 @@
+     "password": "dM3KB471#$HW"
+   },
+   "svnDependencies": {
+-    "@vs-common/core": "http://187.45.121.132:5280/svn/cloud-pacotes-builds/vs-common/core/tags/1.0.20",
+-    "@vs-common/ui": "http://187.45.121.132:5280/svn/cloud-pacotes-builds/vs-common/ui/tags/1.0.20",
+     "@vs-formularios-dinamicos/core": "http://187.45.121.132:5280/svn/cloud-pacotes-builds/vs-formularios-dinamicos/core/tags/1.0.0",
+     "@vs-formularios-dinamicos/ui-primeng": "http://187.45.121.132:5280/svn/cloud-pacotes-builds/vs-formularios-dinamicos/ui-primeng/tags/1.0.0"
+   },
+Index: src/app/assets/resources/i18n/en-US/paginas.json
+===================================================================
+--- src/app/assets/resources/i18n/en-US/paginas.json	(revision 2195)
++++ src/app/assets/resources/i18n/en-US/paginas.json	(working copy)
+@@ -2450,9 +2450,43 @@
+             "botoes": {
+                 "novo": "New"
+             },
++            "exportar": "Residuos",
++            "filtrosAvancados": {
++                "codigoIbama": "Ibama Code",
++                "nomeIbama": "Ibama Name",
++                "descricaoInterna": "Internal Description",
++                "numeroOnu": "UN Number",
++                "codigoEmbarque": "Shipping Code",
++                "nomeEmbarque": "Shipping Name",
++                "siglaUnidadeMedida": "Unit of Measurement",
++                "codigoUnidadeMedida": "Unit of Measurement Code",
++                "nomeUnidadeMedida": "Unit of Measurement Name",
++                "estadoFisico": "Physical State",
++                "codigoEstadoFisico": "Physical State Code",
++                "grupoEmbalagem": "Packaging Group",
++                "composicaoQuimica": "Chemical Composition",
++                "acondicionamento": "Packaging",
++                "codigoTecnologiaTratamento": "Treatment Technology Code",
++                "tecnologiaTratamento": "Treatment Technology",
++                "classeRisco": "Risk Class",
++                "classe": "Class",
++                "codigoImomilizado": "Imobilized Code",
++                "Imobilizado": "Imobilized",
++                "codigoClasse": "Class Code",
++                "observacoes": "Residue Observations",
++                "dataCadastro": "Registration Date",
++                "dataAtualizacao": "Update Date",
++                "dataInativacao": "Deactivation Date",
++                "xReciclado": "Recycled",
++                "ativo": "Active"
++            },
+             "tabela": {
+                 "colunas": {
++                    "codigo": "Code",
+                     "codigoIbama": "Ibama Code",
++                    "nomeEstadoFisico": "Physical State",
++                    "nomeIbama": "Residue Name",
++                    "dataAtualizacao": "Update Date",
+                     "descricaoInterna": "Internal Description",
+                     "unidade": "Unit",
+                     "classe": "Class",
+@@ -2474,12 +2508,12 @@
+                     "placeholder": "Enter the Ibama code"
+                 },
+                 "nomeIbama": {
+-                    "label": "Ibama Name",
+-                    "placeholder": "Enter the Ibama name"
++                    "label": "Residue Name (SINIR)",
++                    "placeholder": "Enter the residue name"
+                 },
+-                "descricaoInterna": {
+-                    "label": "Internal Description",
+-                    "placeholder": "Enter the internal description"
++                "nomeInterno": {
++                    "label": "Internal Residue Name",
++                    "placeholder": "Enter the internal residue name"
+                 },
+                 "numeroOnu": {
+                     "label": "UN Number",
+Index: src/app/assets/resources/i18n/pt-BR/paginas.json
+===================================================================
+--- src/app/assets/resources/i18n/pt-BR/paginas.json	(revision 2195)
++++ src/app/assets/resources/i18n/pt-BR/paginas.json	(working copy)
+@@ -2430,9 +2430,44 @@
+       "botoes": {
+         "novo": "Novo"
+       },
++      "exportar": "Residuos",
++      "filtrosAvancados": {
++        "codigoIbama": "Código Ibama",
++        "nomeIbama": "Descrição do Residuo (SINIR)",
++        "descricaoInterna": "Descrição Interna",
++        "numeroOnu": "Número ONU",
++        "codigoEmbarque": "Código de Embarque",
++        "nomeEmbarque": "Nome de Embarque",
++        "siglaUnidadeMedida": "Sigla da Unidade de Medida",
++        "codigoUnidadeMedida": "Codigo unidade de Medida",
++        "nomeUnidadeMedida": "Nome unidade de Medida",
++        "estadoFisico": "Estado Físico",
++        "codigoEstadoFisico": "Codigo Estado Físico",
++        "grupoEmbalagem": "Grupo de Embalagem",
++        "composicaoQuimica": "Composição Química",
++        "acondicionamento": "Acondicionamento",
++        "codigoTecnologiaTratamento": "Codigo Tecnologia de Tratamento",
++        "tecnologiaTratamento": "Tecnologia de Tratamento",
++        "classeRisco": "Classe de Risco",
++        "classe": "Classe",
++        "codigoImomilizado": "Código Imomilizado",
++        "Imobilizado": "Imobilizado",
++        "codigoClasse": "Codigo Classe",
++        "observacoes": "Observações do Residuo",
++        "dataCadastro": "Data de Cadastro",
++        "dataAtualizacao": "Data de Atualização",
++        "dataInativacao": "Data de Inativação",
++        "xReciclado": "Reciclado",
++        "ativo": "Ativo"
++      },
+       "tabela": {
++        "titulo": "Resíduos",
+         "colunas": {
++          "codigo": "Código",
+           "codigoIbama": "Código Ibama",
++          "nomeEstadoFisico": "Estado Físico",
++          "nomeIbama": "Nome do Resíduo",
++          "dataAtualizacao": "Data de Atualização",
+           "descricaoInterna": "Descrição Interna",
+           "unidade": "Unidade",
+           "classe": "Classe",
+@@ -2454,12 +2489,12 @@
+           "placeholder": "Informe o código Ibama"
+         },
+         "nomeIbama": {
+-          "label": "Descrição do Residuo (SINIR)",
+-          "placeholder": "Informe a descrição do residuo"
++          "label": "Nome do Residuo (SINIR)",
++          "placeholder": "Informe o Nome do residuo"
+         },
+-        "descricaoInterna": {
+-          "label": "Descrição Interna",
+-          "placeholder": "Informe a descrição interna"
++        "nomeInterno": {
++          "label": "Nome Interno do Residuo",
++          "placeholder": "Informe o nome interno do residuo"
+         },
+         "numeroOnu": {
+           "label": "Número ONU",
+Index: src/app/paginas/paginas-pessoas/pagina-cadastro-pessoa/steps-cadastro-pessoa/step-cadastro-pessoa/cartoes/cartao-cadastro-pessoa/cartao-cadastro-pessoa.component.html
+===================================================================
+--- src/app/paginas/paginas-pessoas/pagina-cadastro-pessoa/steps-cadastro-pessoa/step-cadastro-pessoa/cartoes/cartao-cadastro-pessoa/cartao-cadastro-pessoa.component.html	(revision 2195)
++++ src/app/paginas/paginas-pessoas/pagina-cadastro-pessoa/steps-cadastro-pessoa/step-cadastro-pessoa/cartoes/cartao-cadastro-pessoa/cartao-cadastro-pessoa.component.html	(working copy)
+@@ -2,6 +2,7 @@
+   <vs-input-multiSelect
+     formControlName="codigosTiposCadastro"
+     [label]="'paginas.pessoas.CADASTRO_PESSOA.STEPS.CARTAO_CADASTRO.TIPO_CADASTRO_PESSOA.TITULO' | translate"
++    (onChange)="onChangeTipoCadastro()"
+     [primeNG]="{
+       options: tiposCadastro,
+       optionValue: 'codigo',
+Index: src/app/paginas/paginas-pessoas/pagina-cadastro-pessoa/steps-cadastro-pessoa/step-cadastro-pessoa/cartoes/cartao-cadastro-pessoa/cartao-cadastro-pessoa.component.ts
+===================================================================
+--- src/app/paginas/paginas-pessoas/pagina-cadastro-pessoa/steps-cadastro-pessoa/step-cadastro-pessoa/cartoes/cartao-cadastro-pessoa/cartao-cadastro-pessoa.component.ts	(revision 2195)
++++ src/app/paginas/paginas-pessoas/pagina-cadastro-pessoa/steps-cadastro-pessoa/step-cadastro-pessoa/cartoes/cartao-cadastro-pessoa/cartao-cadastro-pessoa.component.ts	(working copy)
+@@ -71,7 +71,9 @@
+       }
+     });
+   }
+-
++  onChangeTipoCadastro() {
++    console.log('entrou');
++  }
+   pegarTiposCadastrosPessoa() {
+     this.presenter
+       .pegarTiposCadastrosPessoa()
+Index: src/app/paginas/paginas-residuos/pagina-residuo/filtros-avancados/filtros.ts
+===================================================================
+--- src/app/paginas/paginas-residuos/pagina-residuo/filtros-avancados/filtros.ts	(revision 2195)
++++ src/app/paginas/paginas-residuos/pagina-residuo/filtros-avancados/filtros.ts	(working copy)
+@@ -3,7 +3,7 @@
 
-PRetFlgEmpresa.Call(&SDTEmpresa)
-PRetParEmp.Call(&EmpParCod1)
-PRetFlagFilialSdt.Call(&SDTNF.NfFilCod ,&FlagFilial)
+ export const PAGINA_LISTAR_RESIDUOS_FILTROS_AVANCADOS: SelectItem<IDropdownFiltro>[] = [
+   {
+-    label: 'Código do Ibama',
++    label: 'paginas.listarResiduos.filtrosAvancados.codigoIbama',
+     value: {
+       tipo: 'texto',
+       nomeChave: 'numeroIbama',
+@@ -10,14 +10,14 @@
+     },
+   },
+   {
+-    label: 'Nome Resíduo(Sinir)',
++    label: 'paginas.listarResiduos.filtrosAvancados.nomeIbama',
+     value: {
+       tipo: 'texto',
+-      nomeChave: 'nomeResiduo',
++      nomeChave: 'nomeIbama',
+     },
+   },
+   {
+-    label: 'Nome Resíduo(Interno)',
++    label: 'paginas.listarResiduos.filtrosAvancados.descricaoInterna',
+     value: {
+       tipo: 'texto',
+       nomeChave: 'nomeResiduoInterno',
+@@ -24,7 +24,7 @@
+     },
+   },
+   {
+-    label: 'Código Unidade de Medida',
++    label: 'paginas.listarResiduos.filtrosAvancados.codigoUnidadeMedida',
+     value: {
+       tipo: 'inteiro',
+       nomeChave: 'codigoUnidadeMedida',
+@@ -31,14 +31,21 @@
+     },
+   },
+   {
+-    label: 'Unidade de Medida',
++    label: 'paginas.listarResiduos.filtrosAvancados.siglaUnidadeMedida',
+     value: {
+       tipo: 'texto',
++      nomeChave: 'siglaUnidadeMedida',
++    },
++  },
++  {
++    label: 'paginas.listarResiduos.filtrosAvancados.nomeUnidadeMedida',
++    value: {
++      tipo: 'texto',
+       nomeChave: 'nomeUnidadeMedida',
+     },
+   },
+   {
+-    label: 'Código do Estado Fisico',
++    label: 'paginas.listarResiduos.filtrosAvancados.codigoEstadoFisico',
+     value: {
+       tipo: 'inteiro',
+       nomeChave: 'codigoEstadoFisico',
+@@ -45,7 +52,7 @@
+     },
+   },
+   {
+-    label: 'Estado Fisico',
++    label: 'paginas.listarResiduos.filtrosAvancados.estadoFisico',
+     value: {
+       tipo: 'texto',
+       nomeChave: 'nomeEstadoFisico',
+@@ -52,7 +59,7 @@
+     },
+   },
+   {
+-    label: 'Resíduo Ativo',
++    label: 'paginas.listarResiduos.filtrosAvancados.ativo',
+     value: {
+       tipo: 'booleano',
+       nomeChave: 'xAtivo',
+@@ -59,7 +66,7 @@
+     },
+   },
+   {
+-    label: 'Data de Cadastro',
++    label: 'paginas.listarResiduos.filtrosAvancados.dataCadastro',
+     value: {
+       tipo: 'data',
+       nomeChave: 'dataCadastro',
+@@ -66,7 +73,7 @@
+     },
+   },
+   {
+-    label: 'Data de Inativação',
++    label: 'paginas.listarResiduos.filtrosAvancados.dataInativacao',
+     value: {
+       tipo: 'data',
+       nomeChave: 'dataInativado',
+@@ -73,7 +80,7 @@
+     },
+   },
+   {
+-    label: 'Data de Atualização',
++    label: 'paginas.listarResiduos.filtrosAvancados.dataAtualizacao',
+     value: {
+       tipo: 'data',
+       nomeChave: 'dataAtualizaca',
+@@ -80,7 +87,7 @@
+     },
+   },
+   {
+-    label: 'Oberservação do Resíduo',
++    label: 'paginas.listarResiduos.filtrosAvancados.observacoes',
+     value: {
+       tipo: 'texto',
+       nomeChave: 'observacaoResiduo',
+@@ -87,7 +94,7 @@
+     },
+   },
+   {
+-    label: 'Composição Química',
++    label: 'paginas.listarResiduos.filtrosAvancados.composicaoQuimica',
+     value: {
+       tipo: 'texto',
+       nomeChave: 'composicaoQuimica',
+@@ -94,7 +101,7 @@
+     },
+   },
+   {
+-    label: 'Resíduo é Reciclado',
++    label: 'paginas.listarResiduos.filtrosAvancados.xReciclado',
+     value: {
+       tipo: 'booleano',
+       nomeChave: 'xReciclado',
+@@ -101,7 +108,7 @@
+     },
+   },
+   {
+-    label: 'Código da Classe do Resíduo',
++    label: 'paginas.listarResiduos.filtrosAvancados.codigoClasse',
+     value: {
+       tipo: 'inteiro',
+       nomeChave: 'codigoClasse',
+@@ -108,7 +115,7 @@
+     },
+   },
+   {
+-    label: 'Classe do Resíduo',
++    label: 'paginas.listarResiduos.filtrosAvancados.classe',
+     value: {
+       tipo: 'texto',
+       nomeChave: 'nomeClasse',
+@@ -115,28 +122,14 @@
+     },
+   },
+   {
+-    label: 'Código do Imobilizado',
++    label: 'paginas.listarResiduos.filtrosAvancados.codigoTecnologiaTratamento',
+     value: {
+       tipo: 'inteiro',
+-      nomeChave: 'codigoImobilizado',
+-    },
+-  },
+-  {
+-    label: 'imobilizado',
+-    value: {
+-      tipo: 'texto',
+-      nomeChave: 'nomeImobilizado',
+-    },
+-  },
+-  {
+-    label: 'Código do Tratamento',
+-    value: {
+-      tipo: 'inteiro',
+       nomeChave: 'codigoTratamento',
+     },
+   },
+   {
+-    label: 'Tratamento',
++    label: 'paginas.listarResiduos.filtrosAvancados.tecnologiaTratamento',
+     value: {
+       tipo: 'texto',
+       nomeChave: 'nomeTratamento',
+@@ -143,7 +136,7 @@
+     },
+   },
+   {
+-    label: 'Número ONU',
++    label: 'paginas.listarResiduos.filtrosAvancados.numeroOnu',
+     value: {
+       tipo: 'inteiro',
+       nomeChave: 'numeroONU',
+@@ -150,7 +143,7 @@
+     },
+   },
+   {
+-    label: 'Número da Classe Risco',
++    label: 'paginas.listarResiduos.filtrosAvancados.classeRisco',
+     value: {
+       tipo: 'inteiro',
+       nomeChave: 'numeroClasseRisco',
+@@ -157,7 +150,7 @@
+     },
+   },
+   {
+-    label: 'Nome do Embarque',
++    label: 'paginas.listarResiduos.filtrosAvancados.nomeEmbarque',
+     value: {
+       tipo: 'texto',
+       nomeChave: 'nomeEmbarque',
+@@ -164,7 +157,7 @@
+     },
+   },
+   {
+-    label: 'Código do Grupo de Embalagem',
++    label: 'paginas.listarResiduos.filtrosAvancados.nomeEmbarque',
+     value: {
+       tipo: 'inteiro',
+       nomeChave: 'codigoGrupoEmbalagem',
+@@ -171,7 +164,7 @@
+     },
+   },
+   {
+-    label: 'Nome do Grupo de Embalagem',
++    label: 'paginas.listarResiduos.filtrosAvancados.codigoEmbarque',
+     value: {
+       tipo: 'texto',
+       nomeChave: 'nomeGrupoEmbalagem',
+Index: src/app/paginas/paginas-residuos/pagina-residuo/pagina-editar-cadastrar-residuo/pagina-editar-cadastrar-residuo.component.html
+===================================================================
+--- src/app/paginas/paginas-residuos/pagina-residuo/pagina-editar-cadastrar-residuo/pagina-editar-cadastrar-residuo.component.html	(revision 2195)
++++ src/app/paginas/paginas-residuos/pagina-residuo/pagina-editar-cadastrar-residuo/pagina-editar-cadastrar-residuo.component.html	(working copy)
+@@ -2,32 +2,28 @@
+   <vs-pagina-conteudo>
+     <vs-cartao nomeIcone="fa-solid fa-trash" [titulo]="'Cadastro de Resíduos' | translate">
+       <vs-cartao-conteudo>
+-        <vs-formulario-base class="grid" [formGroup]="formularioResiduos" (onSubmited)="onSubmitResiduo($event)">
++        <vs-formulario-base class="grid" [formGroup]="formularioResiduos" (onSubmited)="onSubmitResiduo()">
++          <vs-input-autoComplete
++          class="col-12 md:col-12"
++          formControlName="numeroIbama"
++          (completeMethod)="pegarNomeIbama($event)"
++          [label]="'paginas.cadastrarResiduos.campos.nomeIbama.label' | translate"
++          [primeNG]="{
++            dropdown: true,
++            appendTo: 'body',
++            field: 'nomeIbama',
++            concat: 'numeroIbama',
++            dataKey: 'numeroIbama',
++            placeholder: 'paginas.cadastrarResiduos.campos.nomeIbama.placeholder' | translate,
++            suggestions: ibama
++          }"/>
++
+           <vs-input-text
+-            class="col-12 md:col-3"
+-            [pKeyFilter]="REGEX_BLOQUEIA_CARACTERES_IBAMA"
+-            formControlName="numeroIbama"
+-            [label]="'paginas.cadastrarResiduos.campos.codigoIbama.label' | translate"
+-            [primeNG]="{
+-              maxlength: 25,
+-              disabled: true
+-            }"
+-          />
+-          <vs-input-text
+-            class="col-12 md:col-9"
+-            formControlName="nomeIbama"
+-            [label]="'paginas.cadastrarResiduos.campos.nomeIbama.label' | translate"
+-            [primeNG]="{
+-              maxlength: 25,
+-              disabled: true
+-            }"
+-          />
+-          <vs-input-text
+             class="col-12"
+             formControlName="nomeResiduoInterno"
+-            [label]="'paginas.cadastrarResiduos.campos.descricaoInterna.label' | translate"
++            [label]="'paginas.cadastrarResiduos.campos.nomeInterno.label' | translate"
+             [primeNG]="{
+-              placeholder: 'paginas.cadastrarResiduos.campos.descricaoInterna.placeholder' | translate,
++              placeholder: 'paginas.cadastrarResiduos.campos.nomeInterno.placeholder' | translate,
+               maxlength: 200
+             }"
+           />
+@@ -54,7 +50,7 @@
+             }"
+           />
+           <vs-input-autoComplete
+-            class="col-6 md:col-3"
++            class="col-12 md:col-3"
+             formControlName="unidadeMedida"
+             (completeMethod)="pegarUnidadesPaginado($event)"
+             [label]="'paginas.cadastrarResiduos.campos.unidadeMedida.label' | translate"
+@@ -67,7 +63,7 @@
+             }"
+           />
+           <vs-input-autoComplete
+-            class="col-6 md:col-3"
++            class="col-12 md:col-3"
+             formControlName="estadoFisico"
+             (completeMethod)="pegarEstadoFisicoPaginado($event)"
+             [label]="'paginas.cadastrarResiduos.campos.estadoFisico.label' | translate"
+@@ -80,7 +76,7 @@
+             }"
+           />
+           <vs-input-autoComplete
+-            class="col-6 md:col-3"
++            class="col-12 md:col-3"
+             formControlName="grupoEmbalagem"
+             (completeMethod)="pegarGrupoEmbalagemPaginado($event)"
+             [label]="'paginas.cadastrarResiduos.campos.grupoEmbalagem.label' | translate"
+@@ -93,7 +89,7 @@
+             }"
+           />
+           <vs-input-text
+-            class="col-6 md:col-3"
++            class="col-12 md:col-3"
+             formControlName="composicaoQuimica"
+             [label]="'paginas.cadastrarResiduos.campos.composicaoQuimica.label' | translate"
+             [primeNG]="{
+@@ -102,7 +98,7 @@
+             }"
+           />
+           <vs-input-autoComplete
+-            class="col-6 md:col-3"
++            class="col-12 md:col-3"
+             formControlName="acondicionamento"
+             (completeMethod)="pegarAcondicionamentoPaginado($event)"
+             [label]="'paginas.cadastrarResiduos.campos.acondicionamento.label' | translate"
+@@ -116,7 +112,7 @@
+           />
 
-PCarSdtGerNF.Call(&SDTNF)
+           <vs-input-autoComplete
+-            class="col-6 md:col-3"
++            class="col-12 md:col-3"
+             formControlName="tratamento"
+             (completeMethod)="pegarTratamentoPaginado($event)"
+             [label]="'paginas.cadastrarResiduos.campos.tecnologiaTratamento.label' | translate"
+@@ -130,7 +126,7 @@
+           />
 
-Do 'BuscaFlagOperacao'
+           <vs-input-text
+-            class="col-6 md:col-3"
++            class="col-12 md:col-3"
+             pKeyFilter="num"
+             formControlName="numeroClasseRisco"
+             [label]="'paginas.cadastrarResiduos.campos.classeRisco.label' | translate"
+@@ -162,25 +158,8 @@
+             }"
+           />
 
-If &SDTNF.Erros.Count > 0 // se possuir erros, não processa a nota
-    &SDTNF.ProcessarNota = 0
+-          <!-- <vs-configuracao-switch
+-            class="col-12 md:col-2 mt-3"
+-            formControlName="xReciclado"
+-            titulo="Reciclado"
+-            tituloInativo="Reciclado"
+-          /> -->
+-          <!-- <vs-input-text
+-            class="col-12 md:col-10"
+-            formControlName="composicaoQuimica"
+-            [label]="'Composição Química' | translate"
+-            [primeNG]="{
+-              placeholder: 'Infome o composição química' | translate,
+-              maxlength: 150
+-            }"
+-          /> -->
+-
+           <vs-switch-ativo class="col-12" formControlName="xAtivo" />
+           <div class="flex flex-row mt-3 justify-content-end col-12">
+-            <!-- <button pButton class="p-button-outlined p-button-secondary " type="reset" [label]="'Limpar' | translate"></button>   -->
+             <p-button [label]="'paginas.cadastrarResiduos.botoes.cancelar' | translate" (click)="cancelarResiduo()"></p-button>
+             <button
+               pButton
+Index: src/app/paginas/paginas-residuos/pagina-residuo/pagina-editar-cadastrar-residuo/pagina-editar-cadastrar-residuo.component.presenter.ts
+===================================================================
+--- src/app/paginas/paginas-residuos/pagina-residuo/pagina-editar-cadastrar-residuo/pagina-editar-cadastrar-residuo.component.presenter.ts	(revision 2195)
++++ src/app/paginas/paginas-residuos/pagina-residuo/pagina-editar-cadastrar-residuo/pagina-editar-cadastrar-residuo.component.presenter.ts	(working copy)
+@@ -8,10 +8,10 @@
+ import { UsecasePegarClasseResiduoPaginado } from '@usecases/residuo/residuo-classe/pegar-residuo-classe-paginado.usecase';
+ import { UsecaseCadastrarResiduo } from '@usecases/residuo/residuo/cadastrar-residuo.usecase';
+ import { FormGroup } from '@angular/forms';
+-import { IResiduoInformacaoMTR } from '@entidades/residuo/residuo-mtr/residuo-informacao-MTR/residuo-informacao-MTR.interface';
+ import { UsecasePegarResiduoPorCodigo } from '@usecases/residuo/residuo/pegar-residuo-por-codigo.usecase';
+ import { UsecaseAtualizarResiduo } from '@usecases/residuo/residuo/atualizar-residuo.usecase';
+ import { UsecasePegarResiduoTratamentoPaginado } from '@usecases/residuo/residuo-tratamento/pegar-residuo-tratamento-paginado.usecase';
++import { UsecasePegarIntegracaoMtrResiduosPaginado } from '@usecases/integracao/integracao-mtr-residuos/pegar-integracao-mtr-residuos-paginado.usecase';
 
-    For &Erro in &SDTNF.Erros
-        Msg(&Erro.DescErro)
-    EndFor
-EndIf
+ @Injectable()
+ export class PaginaEditarCadastrarResiduoPresenter extends Presenter {
+@@ -24,7 +24,8 @@
+     private readonly usecasePegarClasseResiduoPaginado: UsecasePegarClasseResiduoPaginado,
+     private readonly usecaseCadastrarResiduo: UsecaseCadastrarResiduo,
+     private readonly usecasePegarResiduoPorCodigo: UsecasePegarResiduoPorCodigo,
+-    private readonly usecaseAtualizarResiduo: UsecaseAtualizarResiduo
++    private readonly usecaseAtualizarResiduo: UsecaseAtualizarResiduo,
++    private readonly usecasePegarIntegracaoMtrResiduosPaginado: UsecasePegarIntegracaoMtrResiduosPaginado
+   ) {
+     super();
+   }
+@@ -41,6 +42,8 @@
 
-If &SDTNF.ProcessarNota = 1
-    &Processa = 'SIM'
-    PLeMovEstoq.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero, &LeMovEstoque)
+   pegarClasseResiduoPaginado = (evento: LazyLoadEvent) => this.usecasePegarClasseResiduoPaginado.executar(evento);
 
++  pegarIntegracaoMtrResiduosPaginado = (evento: LazyLoadEvent) => this.usecasePegarIntegracaoMtrResiduosPaginado.executar(evento);
++
+   cadastrarResiduo = (formGroup: FormGroup) => {
+     return this.usecaseCadastrarResiduo.executar({
+       nomeResiduoInterno: formGroup.value['nomeResiduoInterno'],
+@@ -50,7 +53,6 @@
+       codigoEstadoFisico: formGroup.value['estadoFisico']?.codigo,
+       codigoUnidadeMedida: formGroup.value['unidadeMedida']?.codigo,
+       informacaoMTR: {
+-        nomeIbama: formGroup.value['nomeIbama'],
+         codigoAcondicionamento: formGroup.value['acondicionamento']?.codigo,
+         codigoClasse: formGroup.value['classe']?.codigo,
+         codigoGrupoEmbalagem: formGroup.value['grupoEmbalagem']?.codigo,
+@@ -57,7 +59,7 @@
+         codigoTratamento: formGroup.value['tratamento']?.codigo,
+         nomeEmbarque: formGroup.value['nomeEmbarque'],
+         numeroClasseRisco: formGroup.value['numeroClasseRisco'],
+-        numeroIbama: formGroup.value['numeroIbama'],
++        numeroIbama: formGroup.value['numeroIbama'].numeroIbama,
+         numeroONU: formGroup.value['numeroONU'],
+       },
+       informacaoClassificacao: {
+@@ -76,7 +78,6 @@
+       codigoEstadoFisico: formGroup.value['estadoFisico']?.codigo,
+       codigoUnidadeMedida: formGroup.value['unidadeMedida']?.codigo,
+       informacaoMTR: {
+-        nomeIbama: formGroup.value['nomeIbama'],
+         codigoAcondicionamento: formGroup.value['acondicionamento']?.codigo,
+         codigoClasse: formGroup.value['classe']?.codigo,
+         codigoGrupoEmbalagem: formGroup.value['grupoEmbalagem']?.codigo,
+@@ -83,7 +84,7 @@
+         codigoTratamento: formGroup.value['tratamento']?.codigo,
+         nomeEmbarque: formGroup.value['nomeEmbarque'],
+         numeroClasseRisco: formGroup.value['numeroClasseRisco'],
+-        numeroIbama: formGroup.value['numeroIbama'],
++        numeroIbama: formGroup.value['numeroIbama'].numeroIbama,
+         numeroONU: formGroup.value['numeroONU'],
+       },
+       informacaoClassificacao: {
+Index: src/app/paginas/paginas-residuos/pagina-residuo/pagina-editar-cadastrar-residuo/pagina-editar-cadastrar-residuo.component.spec.ts
+===================================================================
+--- src/app/paginas/paginas-residuos/pagina-residuo/pagina-editar-cadastrar-residuo/pagina-editar-cadastrar-residuo.component.spec.ts	(revision 2195)
++++ src/app/paginas/paginas-residuos/pagina-residuo/pagina-editar-cadastrar-residuo/pagina-editar-cadastrar-residuo.component.spec.ts	(working copy)
+@@ -1,4 +1,3 @@
+-/* tslint:disable:no-unused-variable */
+ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-     If &SDTNF.NotaProdutor.Count > 0
-       for &sdtNfProdutor in &sdtNf.NotaProdutor
-           &SDTNFP = New()
-            &SDTNFP.DatEmis = &SDTNF.NfDatEmis
-            &SDTNFP.FilCod  = &SDTNF.NfFilCod
-            &SDTNFP.NfNumero = &SDTNF.NfNumero
-            If &sdtNfProdutor.NFPChv = ''
-                &SDTNFP.NFPModelo = '04'
-                &SDTNFP.NFPSerie  = &sdtNfProdutor.NFPSerie
-            Else
-                &SDTNFP.NFPChv = &sdtNfProdutor.NFPChv
-                &SDTNFP.NFPModelo = Substr(&sdtNfProdutor.NFPChv,21,2)
-                &SDTNFP.NFPSerie = Val(Substr(&sdtNfProdutor.NFPChv,23,3))
-            EndIf
-            &SDTNFP.NFPDatEmis = &sdtNfProdutor.NFPDatEmis
-            &SDTNFP.NFPNumero = &sdtNfProdutor.NFPNumero
-           Call(PMovEstoqueNFProdutorSalvar, &SDTNFP, &xErro)
-       EndFor
-     EndIF
+ import { PaginaEditarCadastrarResiduoComponent } from './pagina-editar-cadastrar-residuo.component';
+@@ -9,9 +8,8 @@
 
-    // 93795
-    if &EmpParCod1 = 25 and &LeMovEstoque.TemProblemaArredondamento = 1
+   beforeEach(async(() => {
+     TestBed.configureTestingModule({
+-      declarations: [ PaginaEditarCadastrarResiduoComponent ]
+-    })
+-    .compileComponents();
++      declarations: [PaginaEditarCadastrarResiduoComponent],
++    }).compileComponents();
+   }));
 
-        //assume-se que é problema de arredondamento somente quando a diferença for de 1 centavo (positivo ou negativo)
-        &dif = &LeMovEstoque.ParcVlrTot.Round(2) - &LeMovEstoque.NfVlrTotal.Round(2)
-        &NfFilCod = &SDTNF.NfFilCod
-        &NFDatEmis = &SDTNF.NfDatEmis
-        &NfNumero = &SDTNF.NfNumero
-        do 'AjustarArredondamentoItem'
-        commit
-    endif
-    // 93795
+   beforeEach(() => {
+Index: src/app/paginas/paginas-residuos/pagina-residuo/pagina-editar-cadastrar-residuo/pagina-editar-cadastrar-residuo.component.ts
+===================================================================
+--- src/app/paginas/paginas-residuos/pagina-residuo/pagina-editar-cadastrar-residuo/pagina-editar-cadastrar-residuo.component.ts	(revision 2195)
++++ src/app/paginas/paginas-residuos/pagina-residuo/pagina-editar-cadastrar-residuo/pagina-editar-cadastrar-residuo.component.ts	(working copy)
+@@ -12,6 +12,8 @@
+ import { IResiduoTratamento } from '@entidades/residuo/residuo-tratamento/residuo-tratamento.interface';
+ import { IResiduoClasse } from '@entidades/residuo/residuo-classe/residuo-classe.interface';
+ import { VSServicoToast, FiltroManager, AutoCompleteCompleteEvent } from '@vs-common/core';
++import { IIntegracaoMtrResiduos } from '@entidades/integracao/integracao-mtr-residuos/integracao-mtr-residuos.interface';
++import { IResiduoInformacaoMTR } from '@entidades/residuo/residuo-mtr/residuo-informacao-MTR/residuo-informacao-MTR.interface';
 
-    If &LeMovEstoque.Processa = 'NAO'
-        PExcMovEstoque.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
-        &Processa = 'NAO'
-    EndIf
+ @Component({
+   selector: 'pagina-editar-cadastrar-residuo',
+@@ -26,6 +28,7 @@
+   residuo: IResiduo;
+   unidadeMedida: IUnidadeMedida[];
+   estadoFisico: IResiduoEstadoFisico[];
++  ibama: IIntegracaoMtrResiduos[];
+   grupoEmbalagem: IResiduoGrupoEmbalagem[];
+   acondicionamento: IResiduoAcondicionamento[];
+   tratamento: IResiduoTratamento[];
+@@ -52,6 +55,7 @@
+     this.estadoFisico = [];
+     this.grupoEmbalagem = [];
+     this.acondicionamento = [];
++    this.ibama = [];
+     this.tratamento = [];
+     this.classe = [];
+   }
+@@ -82,11 +86,9 @@
+       )
+       .subscribe((res) => {
+         this.residuo = res;
+-
+         this.formularioResiduos.patchValue({
+           codigo: res.codigo,
+-          numeroIbama: res.informacaoMTR?.numeroIbama,
+-          nomeIbama: res.informacaoMTR?.nomeIbama,
++          numeroIbama: { numeroIbama: res.informacaoMTR?.numeroIbama, nomeIbama: res.informacaoMTR?.nomeIbama },
+           nomeResiduoInterno: res.nomeResiduoInterno,
+           numeroONU: res.informacaoMTR?.numeroONU,
+           nomeEmbarque: res.informacaoMTR?.nomeEmbarque,
+@@ -109,16 +111,13 @@
+     this.router.navigate(['residuos', 'listar']);
+   }
 
-    // Verifica se o plano de pagamento é a prazo e gera as parcelas
-    PLePlaPgto.Call(&LeMovEstoque.NfPagCod, &Aux)
-    If &Aux = 2 .and. &LeMovEstoque.TemParcela = 'S' .and. &LeMovEstoque.Processa = 'SIM'
-        Do 'ProcessaParcelas'
-    EndIf
+-  onSubmitResiduo(e: Event) {
+-    // TODO: REMOVER ISSO PORQUE TODA VEZ QUE O USUÁRIO FOR CLICAR NO BOTÃO IRÁ SE INSCREVER NO EVENTO NOVAMENTE
+-    this.activatedRoute.paramMap.pipe(takeUntil(this.destroyed$)).subscribe((params) => {
+-      const codigoResiduo = params.get('codigo');
+-      if (codigoResiduo) {
+-        this.editarResiduo();
+-      } else {
+-        this.cadastrarResiduo();
+-      }
+-    });
++  onSubmitResiduo() {
++    const codigoResiduo = this.activatedRoute.snapshot.paramMap.get('codigo');
++    if (codigoResiduo) {
++      this.editarResiduo();
++    } else {
++      this.cadastrarResiduo();
++    }
+   }
 
-    If &OpeEst76Flag in (2, 3) /*.and. &LeMovEstoque.NfOpeEstMovto in (1,2)*/ //Complemento de ICMS de Saida e Entrada e Nf-e Complementar   sol 76961
-        WVincNotaFiscal.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero, &RetVinc)
-        If &RetVinc = 'NAO' and &OpeEst76Flag in (2)
-            Msg('Informação de referência a nota fiscal de complemento incorreta. Documento não pode ser processado!')
-            &Processa = 'NAO'
-            if &EmpParCod1 = 25
-                PExcMovEstoque.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
-                return
-            EndIf
-        EndIf
-    EndIF
+   cadastrarResiduo() {
+@@ -144,7 +143,6 @@
+           tipo: 'success',
+           mensagemPadrao: 'editado',
+         });
+-
+         this.router.navigate(['residuos', 'listar']);
+       });
+   }
+@@ -153,7 +151,6 @@
+     this.formBuilder.group({
+       codigo: [null, []],
+       numeroIbama: [null, []],
+-      nomeIbama: [null, [Validators.minLength(1), Validators.maxLength(200)]],
+       nomeResiduoInterno: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(200)]],
+       numeroONU: [null, []],
+       nomeEmbarque: [null, [Validators.maxLength(150)]],
+@@ -224,6 +221,23 @@
+       });
+   }
 
-    If &Processa = 'SIM'
-        PLeMovEstoq.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero, &LeMovEstoque)
++  pegarNomeIbama($event: AutoCompleteCompleteEvent) {
++    const filtroManager = new FiltroManager();
++    filtroManager.adicionarFiltroNormal('NumeroNomeIbama', $event.query);
++
++    this.presenter
++      .pegarIntegracaoMtrResiduosPaginado({
++        filters: filtroManager.obterFiltros(),
++      })
++      .pipe(
++        takeUntil(this.destroyed$),
++        finalize(() => this.changeDetectorRef.detectChanges())
++      )
++      .subscribe((res) => {
++        this.ibama = res.dados;
++      });
++  }
++
+   pegarAcondicionamentoPaginado($event: AutoCompleteCompleteEvent) {
+     const filtroManager = new FiltroManager();
 
-        PLeDocumento.Call(&LeMovEstoque.NfDocCod, &NroItens, &TipImp)
+Index: src/app/paginas/paginas-residuos/pagina-residuo/pagina-residuo.component.html
+===================================================================
+--- src/app/paginas/paginas-residuos/pagina-residuo/pagina-residuo.component.html	(revision 2195)
++++ src/app/paginas/paginas-residuos/pagina-residuo/pagina-residuo.component.html	(working copy)
+@@ -15,7 +15,7 @@
+           styleClass="p-datatable-gridlines"
+           sortMode="multiple"
+           [rows]="paginacao.linhas"
+-          [columns]="colunas"
++          [columns]="colunasSelecionadas"
+           [totalRecords]="paginacao.totalLinhas"
+           (onLazyLoad)="pegarResiduosPaginado($event)"
+           [loading]="carregando"
+@@ -23,110 +23,89 @@
+           dataKey="codigoRegistroInquilino"
+           [paginator]="true"
+           [showCurrentPageReport]="true"
++          [reorderableColumns]="true"
++          [resizableColumns]="true"
++          [autoLayout]="true"
+           [tableStyle]="{ 'min-width': '50rem' }"
+           [currentPageReportTemplate]="'primeng.table.paginator.pageReport' | translate"
+         >
+           <ng-template pTemplate="caption">
+-            <app-botao-exportar-tabela
+-              [exportar]="{ tabela: tabelaResiduos, nomeArquivo: 'Resíduos' }"
+-            ></app-botao-exportar-tabela>
++            <div class="flex align-items-center">
++              <vs-filtro-ocultacao-coluna
++                [colunas]="colunas"
++                (atualizarColunas)="colunasSelecionadas = $event"
++                nomeTabela="listarResiduos"
++              ></vs-filtro-ocultacao-coluna>
++              <app-botao-exportar-tabela
++                class="ml-auto"
++                [exportar]="{ tabela: tabelaResiduos, nomeArquivo: 'paginas.listarResiduos.tabela.titulo' }"
++              ></app-botao-exportar-tabela>
++            </div>
+           </ng-template>
+-          <ng-template pTemplate="header">
++          <ng-template pTemplate="header" let-colunas>
+             <tr>
+               <th
+-                pSortableColumn="numeroIbama"
+-                class="text-center w-1"
+-                translate="paginas.listarResiduos.tabela.colunas.codigoIbama"
++                *ngFor="let coluna of colunas"
++                pReorderableColumn
++                [pSortableColumn]="coluna.cabecalho.ordenavel ? coluna.cabecalho.nomeChave : ''"
++                [ngClass]="coluna.cabecalho.class"
+               >
+-                <p-sortIcon field="numeroIbama"></p-sortIcon>
++                {{ coluna.cabecalho.titulo | translate }}
++                <p-sortIcon *ngIf="coluna.cabecalho.ordenavel" [field]="coluna.cabecalho.nomeChave"></p-sortIcon>
+               </th>
+-              <th
+-                pSortableColumn="nomeResiduoInterno"
+-                class="text-left w-2"
+-                translate="paginas.listarResiduos.tabela.colunas.descricaoInterna"
+-              >
+-                <p-sortIcon field="nomeResiduoInterno"></p-sortIcon>
+-              </th>
+-
+-              <th
+-                pSortableColumn="siglaUnidadeMedida"
+-                class="text-center w-1"
+-                translate="paginas.listarResiduos.tabela.colunas.unidade"
+-              >
+-                <p-sortIcon field="siglaUnidadeMedida"></p-sortIcon>
+-              </th>
+-              <th pSortableColumn="nomeClasse" class="text-center w-1" translate="paginas.listarResiduos.tabela.colunas.classe">
+-                <p-sortIcon field="nomeClasse"></p-sortIcon>
+-              </th>
+-              <th pSortableColumn="xAtivo" class="text-center w-1" translate="paginas.listarResiduos.tabela.colunas.xAtivo">
+-                <p-sortIcon field="xAtivo"></p-sortIcon>
+-              </th>
+               <th class="text-center w-1" translate="paginas.listarResiduos.tabela.colunas.acoes"></th>
+             </tr>
+             <tr class="filtros">
+-              <th>
+-                <vs-filtro-tabela
+-                  [primeNG]="{
+-                    type: 'text',
+-                    field: 'numeroIbama',
+-                    showClearButton: false
+-                  }"
+-                />
++              <th *ngFor="let coluna of colunas" class="text-center">
++                <vs-filtro-tabela [primeNG]="{ type: coluna.filtro?.tipo, field: coluna.cabecalho.nomeChave }" />
+               </th>
+-              <th>
+-                <vs-filtro-tabela
+-                  [primeNG]="{
+-                    type: 'text',
+-                    field: 'nomeResiduoInterno'
+-                  }"
+-                />
+-              </th>
+-              <th>
+-                <vs-filtro-tabela
+-                  [primeNG]="{
+-                    type: 'text',
+-                    field: 'siglaUnidadeMedida'
+-                  }"
+-                />
+-              </th>
+-              <th>
+-                <vs-filtro-tabela
+-                  [primeNG]="{
+-                    type: 'text',
+-                    field: 'nomeClasse'
+-                  }"
+-                />
+-              </th>
+-              <th class="text-center">
+-                <vs-filtro-tabela
+-                  [primeNG]="{
+-                    type: 'boolean',
+-                    field: 'xAtivo'
+-                  }"
+-                />
+-              </th>
+               <th></th>
+             </tr>
+           </ng-template>
+-          <ng-template pTemplate="body" let-residuo>
+-            <tr>
+-              <td class="text-center w-1">{{ residuo.informacaoMTR.numeroIbama }}</td>
+-              <td class="text-left w-2">{{ residuo.nomeResiduoInterno }}</td>
+-              <td class="text-center w-1">{{ residuo?.residuoUnidadeMedida?.siglaUnidadeMedida }}</td>
+-              <td class="text-center w-1">{{ residuo?.informacaoMTR?.residuoClasse?.nomeClasse }}</td>
+-              <td class="text-center w-1">
+-                <p-checkbox [(ngModel)]="residuo.xAtivo" [binary]="true" [disabled]="true"></p-checkbox>
+-              </td>
+-              <td class="text-center w-1">
+-                <div class="flex flex-row flex-center">
+-                  <app-botao-tabela
+-                    tooltip="Editar"
+-                    icone="fa-regular fa-pen-to-square"
+-                    (click)="irParaEditarResiduos(residuo.codigo)"
+-                  >
+-                  </app-botao-tabela>
+-                </div>
+-              </td>
++          <ng-template pTemplate="body" let-residuo let-colunas="columns" let-index="rowIndex">
++            <tr [pReorderableRow]="index">
++              <ng-container *ngFor="let coluna of colunas">
++                <td [ngSwitch]="coluna.cabecalho.nomeChave" [ngClass]="coluna.cabecalho.class">
++                  <ng-container *ngSwitchDefault>
++                    <div [innerHTML]="residuo[coluna.cabecalho.nomeChave]"></div>
++                  </ng-container>
++                  <ng-container *ngSwitchCase="'numeroIbama' ">
++                    <div  [innerHTML]="residuo.informacaoMTR[coluna.cabecalho.nomeChave] | escolheDescricao"></div>
++                  </ng-container>
++                  <ng-container *ngSwitchCase="'nomeIbama'">
++                    <div  [innerHTML]="residuo.informacaoMTR[coluna.cabecalho.nomeChave] | escolheDescricao"></div>
++                  </ng-container>
++                  <ng-container *ngSwitchCase="'nomeEstadoFisico'">
++                    <div [innerHTML]="residuo.residuoEstadoFisico[coluna.cabecalho.nomeChave] | escolheDescricao"></div>
++                  </ng-container>
++                  <ng-container *ngSwitchCase="'siglaUnidadeMedida'">
++                    <div [innerHTML]="residuo.residuoUnidadeMedida[coluna.cabecalho.nomeChave] | escolheDescricao"></div>
++                  </ng-container>
++                  <ng-container *ngSwitchCase="'nomeClasse'">
++                    <div [innerHTML]="residuo.informacaoMTR?.residuoClasse[coluna.cabecalho.nomeChave] | escolheDescricao"></div>
++                  </ng-container>
++                  <ng-container *ngSwitchCase="'dataAtualizacao'">
++                    <div [innerHTML]="residuo[coluna.cabecalho.nomeChave] | date : 'DD/MM/YYYY HH:MM'"></div>
++                  </ng-container>
++                  <ng-container *ngSwitchCase="'xAtivo'">
++                    <div>
++                      <p-checkbox [(ngModel)]="residuo.xAtivo" [binary]="true" [disabled]="true"></p-checkbox>
++                    </div>
++                  </ng-container>
++                </td>
++              </ng-container>
++              <ng-container>
++                <td >
++                  <div class="flex flex-row flex-center">
++                    <app-botao-tabela
++                      tooltip="Editar"
++                      icone="fa-regular fa-pen-to-square"
++                      (click)="irParaEditarResiduos(residuo.codigo)"
++                    >
++                    </app-botao-tabela>
++                  </div>
++                </td>
++              </ng-container>
+             </tr>
+           </ng-template>
+         </p-table>
+Index: src/app/paginas/paginas-residuos/pagina-residuo/pagina-residuo.component.spec.ts
+===================================================================
+--- src/app/paginas/paginas-residuos/pagina-residuo/pagina-residuo.component.spec.ts	(revision 2195)
++++ src/app/paginas/paginas-residuos/pagina-residuo/pagina-residuo.component.spec.ts	(working copy)
+@@ -1,4 +1,3 @@
+-/* tslint:disable:no-unused-variable */
+ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-        Msg('Gerando numero do documento...', Status)
-        PGerNota.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero, &LeMovEstoque.NfDocCod)
+ import { PaginaResiduoComponent } from './pagina-residuo.component';
+@@ -9,9 +8,8 @@
 
-        Msg('Numero da nota atualizado...',Status)
-        PCalcRateioBaseIcms.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
+   beforeEach(async(() => {
+     TestBed.configureTestingModule({
+-      declarations: [ PaginaResiduoComponent ]
+-    })
+-    .compileComponents();
++      declarations: [PaginaResiduoComponent],
++    }).compileComponents();
+   }));
 
-        Msg('Numero da nota gerado...', Status)
-//        PAtualMov.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero,1)
-        &ItemParametros                                             = New()
-        &ItemParametros.ItemNotaFiscal.NfFilCod                     = &SDTNF.NfFilCod
-        &ItemParametros.ItemNotaFiscal.NfDatEmis                    = &SDTNF.NfDatEmis
-        &ItemParametros.ItemNotaFiscal.NfNumero                     = &SDTNF.NfNumero
-        &ItemParametros.ItemNotaFiscal.NfSituacao                   = 1
-        &ItemParametros.NaoAtualizarDocto                           = 1 //Tiago Bisol. Sol. 89187
-        PAtualMov.Call(&ItemParametros)
+   beforeEach(() => {
+Index: src/app/paginas/paginas-residuos/pagina-residuo/pagina-residuo.component.ts
+===================================================================
+--- src/app/paginas/paginas-residuos/pagina-residuo/pagina-residuo.component.ts	(revision 2195)
++++ src/app/paginas/paginas-residuos/pagina-residuo/pagina-residuo.component.ts	(working copy)
+@@ -5,13 +5,12 @@
+ import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
+ import { IResiduo } from '@entidades/residuo/residuo/residuo.interface';
+ import { Table } from 'primeng/table';
+-import { IDropdownFiltro, IFiltrosAvancadoTratado, IPaginacao } from '@vs-common/core';
+-import { IColuna } from '@entidades/coluna.interface';
+-import { LazyLoadEvent, SelectItem } from 'primeng/api';
++import { IDropdownFiltro, IFiltroOcultacaoColuna, IFiltrosAvancadoTratado, IPaginacao } from '@vs-common/core';
++import { LazyLoadEvent, MessageService, SelectItem } from 'primeng/api';
+ import { finalize, takeUntil } from 'rxjs';
+ import { PAGINA_LISTAR_RESIDUOS_FILTROS_AVANCADOS } from './filtros-avancados/filtros';
+ import { ServicoPagina } from '@infra/layout/pagina.service';
+-import { TranslateService } from '@ngx-translate/core';
++import { PAGINA_LISTAR_RESIDUOS_FILTROS_COLUNAS } from './filtros-colunas/colunas';
 
-        Msg('Gerando mensagens...', Status)
-        PGeraMen.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
+ @Component({
+   selector: 'pagina-residuo',
+@@ -24,7 +23,8 @@
+   filtrosAvancados: SelectItem<IDropdownFiltro>[];
+   paginacao: IPaginacao;
+   residuos: IResiduo[];
+-  colunas: IColuna[];
++  colunas: IFiltroOcultacaoColuna[] = [];
++  colunasSelecionadas: IFiltroOcultacaoColuna[] = [];
+   carregando: boolean;
 
-        Msg('Mensagem atualizado...', Status)
-        PGrvMsgIteNf.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
+   constructor(
+@@ -32,7 +32,7 @@
+     _formBuilder: UntypedFormBuilder,
+     _changeDetectorRef: ChangeDetectorRef,
+     _presenter: PaginaResiduoPresenter,
+-    translateService: TranslateService,
++    private messageService: MessageService,
+     private servicoPagina: ServicoPagina
+   ) {
+     super(_router, _formBuilder, _changeDetectorRef, _presenter);
+@@ -49,23 +49,8 @@
+       totalPaginas: 0,
+     };
 
-        commit//Tiago Bisol. Sol. 89187
+-    this.colunas = [
+-      { dataKey: 'residuo.informacaoMTR.numeroIbama', title: translateService.instant('Código do Ibama') },
+-      {
+-        dataKey: 'nomeResiduo',
+-        title: translateService.instant('Descrição Interna do Resíduo'),
+-      },
+-      {
+-        dataKey: 'residuo.residuoUnidadeMedida.siglaUnidadeMedida',
+-        title: translateService.instant('Unidade'),
+-      },
+-      {
+-        dataKey: 'nomeClasse',
+-        title: translateService.instant('Classe'),
+-      },
+-      { dataKey: 'xAtivo', title: translateService.instant('Ativo'), type: 'boolean' },
+-    ];
+-
++    this.colunasSelecionadas = [];
++    this.colunas = PAGINA_LISTAR_RESIDUOS_FILTROS_COLUNAS;
+     this.filtrosAvancados = PAGINA_LISTAR_RESIDUOS_FILTROS_AVANCADOS;
+   }
 
-        Msg('Atualizando Caixa...',Status)
-        PGrvLanBan.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
+@@ -74,7 +59,7 @@
+   configurarIcones(): void {
+     this.servicoPagina.configurarExportarTabelas({
+       tabelas: [this.tabelaResiduos],
+-      nomeArquivo: 'Resíduos',
++      nomeArquivo: 'paginas.listarResiduos.exportar',
+     });
 
-        Msg('Extrato atualizado...', Status)
-        PGrvPrinc.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
+     this.servicoPagina.mostrarFavorito(true);
+@@ -95,6 +80,10 @@
+       this.tabelaResiduos.filter(value, value.nomeChave, value.nomeCriterio);
+     });
+   }
++  copiarTexto(texto: string) {
++    navigator.clipboard.writeText(texto);
++    this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Texto copiado para área de transferência.' });
++  }
 
-        Msg('Documento atualizado...', Status)
-        PGrvSit.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero, 3)
+   pegarResiduosPaginado(evento: LazyLoadEvent) {
+     this.carregando = true;
+Index: src/app/paginas/paginas-residuos/paginas-residuos.module.ts
+===================================================================
+--- src/app/paginas/paginas-residuos/paginas-residuos.module.ts	(revision 2195)
++++ src/app/paginas/paginas-residuos/paginas-residuos.module.ts	(working copy)
+@@ -89,41 +89,12 @@
+     },
+   },
+   {
+-    path: 'listar',
+-    component: PaginaResiduoComponent,
+-    canActivate: [],
+-    data: {
+-      titulo: 'Listagem de Resíduos',
+-      breadcrumb: {
+-        label: 'listar',
+-      },
+-    },
++    path: '',
++    loadChildren: () => import('./paginas-imobilizado/paginas-imobilizado.module').then((m) => m.PaginasImobilizadosModule),
+   },
+   {
+-    path: 'cadastrar',
+-    component: PaginaEditarCadastrarResiduoComponent,
+-    canActivate: [],
+-    data: {
+-      titulo: 'Cadastrar Resíduo',
+-      breadcrumb: {
+-        label: 'cadastrar',
+-      },
+-    },
+-  },
+-  {
+-    path: 'editar/:codigo',
+-    component: PaginaEditarCadastrarResiduoComponent,
+-    canActivate: [],
+-    data: {
+-      titulo: 'Editar Resíduo',
+-      breadcrumb: {
+-        label: 'editar',
+-      },
+-    },
+-  },
+-  {
+     path: '',
+-    loadChildren: () => import('./paginas-imobilizado/paginas-imobilizado.module').then((m) => m.PaginasImobilizadosModule),
++    loadChildren: () => import('./pagina-residuo/paginas-residuo.module').then((m) => m.PaginasResiduoModule),
+   },
+ ];
 
-        Msg('Atualizando Financeiro...', Status)
-        PGrvFinanceiro.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
+@@ -142,8 +113,6 @@
+     ModalTratamentoComponent,
+     PaginaGrupoEmbalagemComponent,
+     ModalGrupoEmbalagemComponent,
+-    PaginaResiduoComponent,
+-    PaginaEditarCadastrarResiduoComponent,
+   ],
+ })
+ export class PaginasResiduosModule {}
+Index: src/app/paginas/paginas-veiculos/pagina-cadastrar-editar-veiculo/tabs/tab-cadastrar-editar-veiculo/tab-cadastrar-editar-veiculo.component.html
+===================================================================
+--- src/app/paginas/paginas-veiculos/pagina-cadastrar-editar-veiculo/tabs/tab-cadastrar-editar-veiculo/tab-cadastrar-editar-veiculo.component.html	(revision 2195)
++++ src/app/paginas/paginas-veiculos/pagina-cadastrar-editar-veiculo/tabs/tab-cadastrar-editar-veiculo/tab-cadastrar-editar-veiculo.component.html	(working copy)
+@@ -233,6 +233,7 @@
+           formControlName="codigoUnidadeMedidaCarga"
+           [style]="{ width: 'auto', backgroundColor: 'transparent' }"
+           [options]="unidadeMedida"
++          [filter] = "true"
+           optionLabel="siglaUnidadeMedida"
+           optionValue="codigo"
+           [placeholder]="'paginas.veiculos.cadastrarVeiculo.campos.unidadeMedida.placeholder' | translate"
+Index: src/app/paginas/paginas-veiculos/pagina-cadastrar-editar-veiculo/tabs/tab-cadastrar-editar-veiculo/tab-cadastrar-editar-veiculo.component.presenter.ts
+===================================================================
+--- src/app/paginas/paginas-veiculos/pagina-cadastrar-editar-veiculo/tabs/tab-cadastrar-editar-veiculo/tab-cadastrar-editar-veiculo.component.presenter.ts	(revision 2195)
++++ src/app/paginas/paginas-veiculos/pagina-cadastrar-editar-veiculo/tabs/tab-cadastrar-editar-veiculo/tab-cadastrar-editar-veiculo.component.presenter.ts	(working copy)
+@@ -8,8 +8,7 @@
+ import { UsecasePegarTipoVeiculoPaginado } from '@usecases/veiculo/tipo-veiculo/pegar-tipo-veiculo-paginado.usecase';
+ import { UsecasePegarModeloVeiculoPaginado } from '@usecases/veiculo/modelo-veiculo/pegar-modelo-veiculo-paginado.usecase';
+ import { UsecasePegarMarcaVeiculoPaginado } from '@usecases/veiculo/marca-veiculo/pegar-marca-veiculo-paginado.usecase';
+-import { UsecasePegarPessoasPaginado } from '@usecases/pessoa/pessoa/pegar-pessoas-paginado.usecase';
+-import { UsecasePegarUnidadeMedidaPaginado } from '@usecases/unidade-medida/pegar-unidade-medida-paginado.usecase';
++import { UsecasePegarPessoasPaginado } from '@usecases/pessoa/pessoa/pegar-pessoas-paginado.usecase';
+ import { UsecasePegarUnidadeMedidaTodos } from '@usecases/unidade-medida/pegar-unidade-medida-todos.usecase';
 
-        Msg('Atualizando Contrato...', Status)
-        PAtuMovContPesagem.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
+ @Injectable()
+Index: src/core/data/data.module.ts
+===================================================================
+--- src/core/data/data.module.ts	(revision 2195)
++++ src/core/data/data.module.ts	(working copy)
+@@ -42,10 +42,11 @@
+ import { CLASSIFICACAONFSE_PROVIDERS } from './repositorios/classificacaoNfse/classificacaoNfse.providers';
+ import { SERVICO_PROVIDERS } from './repositorios/servico/servico.providers';
+ import { SERVICO_NBS_PROVIDERS } from './repositorios/servico/servico-nbs/servico-nbs.providers';
+-import { INTEGRACAO_CONSULTA_CEP_PROVIDERS } from './repositorios/integracao/integracao-consulta-cep.providers';
+ import { IMOBILIZADO_PROVIDERS } from './repositorios/imobilizado/imobilizado.providers';
+ import { PONTO_COLETA_PROVIDERS } from './repositorios/ponto-coleta/ponto-coleta/ponto-coleta.provider';
+ import { ORDEM_SERVICO_PROVIDERS } from './repositorios/residuo/residuo-ordem-servico/residuo-ordem-servico.providers';
++import { INTEGRACAO_CONSULTA_CEP_PROVIDERS } from './repositorios/integracao/integracao-cep/integracao-consulta-cep.providers';
++import { INTEGRACAO_CONSULTA_MTR_RESIDUOS_PROVIDERS } from './repositorios/integracao/integracao-mtr-residuos/integracao-consulta-mtr-residuos.providers';
 
-        //INÍCIO 46360
-        If &SDTNF.NfEstTerCod > 0
-            WNFInfoExtra.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero, &SDTRatMovEstoqe)
-        Endif
+ @NgModule({
+   imports: [CommonModule, HttpClientModule],
+@@ -93,6 +94,7 @@
+     ...INTEGRACAO_CONSULTA_CEP_PROVIDERS,
+     ...IMOBILIZADO_PROVIDERS,
+     ...ORDEM_SERVICO_PROVIDERS,
++    ...INTEGRACAO_CONSULTA_MTR_RESIDUOS_PROVIDERS,
+   ],
+ })
+ export class DataModule {}
+Index: src/core/data/repositorios/integracao/integracao-consulta-cep.providers.ts
+===================================================================
+--- src/core/data/repositorios/integracao/integracao-consulta-cep.providers.ts	(revision 2195)
++++ src/core/data/repositorios/integracao/integracao-consulta-cep.providers.ts	(nonexistent)
+@@ -1,9 +0,0 @@
+-import { Provider } from '@angular/core';
+-
+-// Repositórios
+-import { IRepositorioIntegracaoConsultaCep } from '@dominio/repositorios/integracao/integracao-consulta-cep.irepositorio';
+-import { RepositorioIntegracaoConsultaCep } from './integracao-consulta-cep.repositorio';
+-
+-export const INTEGRACAO_CONSULTA_CEP_PROVIDERS: Provider[] = [
+-  { provide: IRepositorioIntegracaoConsultaCep, useClass: RepositorioIntegracaoConsultaCep },
+-];
+Index: src/core/data/repositorios/integracao/integracao-consulta-cep.repositorio.ts
+===================================================================
+--- src/core/data/repositorios/integracao/integracao-consulta-cep.repositorio.ts	(revision 2195)
++++ src/core/data/repositorios/integracao/integracao-consulta-cep.repositorio.ts	(nonexistent)
+@@ -1,31 +0,0 @@
+-import { Injectable } from '@angular/core';
+-import { IRepositorioIntegracaoConsultaCep } from '@dominio/repositorios/integracao/integracao-consulta-cep.irepositorio';
+-import { IIntegracaoEnderecoCep } from '@entidades/integracao/integracao-endereco/integracao-endereco-cep.interface';
+-import { IUsecasePegarIntegracaoEnderecoPorPaisCepDTO } from '@usecases/integracao/integracao-endereco/pegar-integracao-endereco-por-pais-cep.usecase';
+-import { RepositorioBase, ApplicationHttpClient, IObservable, IPaginacaoParametros, IPaginacaoResponse } from '@vs-common/core';
+-
+-@Injectable({ providedIn: 'root' })
+-export class RepositorioIntegracaoConsultaCep extends RepositorioBase implements IRepositorioIntegracaoConsultaCep {
+-  constructor(http: ApplicationHttpClient) {
+-    super(http);
+-  }
+-
+-  criar<S extends unknown>(item: IIntegracaoEnderecoCep | S): IObservable<IIntegracaoEnderecoCep> {
+-    throw new Error('Method not implemented.');
+-  }
+-  atualizar<S extends unknown>(codigo: number, item: IIntegracaoEnderecoCep | S): IObservable<IIntegracaoEnderecoCep> {
+-    throw new Error('Method not implemented.');
+-  }
+-  deletar(codigo: number): IObservable<boolean> {
+-    throw new Error('Method not implemented.');
+-  }
+-  pegarPorCodigo(codigo: number): IObservable<IIntegracaoEnderecoCep> {
+-    throw new Error('Method not implemented.');
+-  }
+-  pegarTodosPaginado(paginacao: IPaginacaoParametros): IObservable<IPaginacaoResponse<IIntegracaoEnderecoCep>> {
+-    throw new Error('Method not implemented.');
+-  }
+-  pegarEnderecoPorCodigoPaisCep(parametros: IUsecasePegarIntegracaoEnderecoPorPaisCepDTO): IObservable<IIntegracaoEnderecoCep> {
+-    return this.http.get(`/integracao/consulta/cep?codigoPais=${parametros.codigoPais}&numeroCEP=${parametros.numeroCEP}`);
+-  }
+-}
+Index: src/core/dominio/repositorios/integracao/integracao-consulta-cep.irepositorio.ts
+===================================================================
+--- src/core/dominio/repositorios/integracao/integracao-consulta-cep.irepositorio.ts	(revision 2195)
++++ src/core/dominio/repositorios/integracao/integracao-consulta-cep.irepositorio.ts	(nonexistent)
+@@ -1,9 +0,0 @@
+-import { IObservable, IRepositorioBase } from '@vs-common/core';
+-import { IIntegracaoEnderecoCep } from '@entidades/integracao/integracao-endereco/integracao-endereco-cep.interface';
+-import { IUsecasePegarIntegracaoEnderecoPorPaisCepDTO } from '@usecases/integracao/integracao-endereco/pegar-integracao-endereco-por-pais-cep.usecase';
+-
+-export abstract class IRepositorioIntegracaoConsultaCep extends IRepositorioBase<IIntegracaoEnderecoCep> {
+-  abstract pegarEnderecoPorCodigoPaisCep(
+-    parametros: IUsecasePegarIntegracaoEnderecoPorPaisCepDTO
+-  ): IObservable<IIntegracaoEnderecoCep>;
+-}
+Index: src/core/dominio/usecases/integracao/integracao-endereco/pegar-integracao-endereco-por-pais-cep.usecase.ts
+===================================================================
+--- src/core/dominio/usecases/integracao/integracao-endereco/pegar-integracao-endereco-por-pais-cep.usecase.ts	(revision 2195)
++++ src/core/dominio/usecases/integracao/integracao-endereco/pegar-integracao-endereco-por-pais-cep.usecase.ts	(working copy)
+@@ -2,7 +2,7 @@
+ import { Injectable } from '@angular/core';
+ import { UsecaseBase } from '@vs-common/core';
+ import { IIntegracaoEnderecoCep } from '@entidades/integracao/integracao-endereco/integracao-endereco-cep.interface';
+-import { IRepositorioIntegracaoConsultaCep } from '@dominio/repositorios/integracao/integracao-consulta-cep.irepositorio';
++import { IRepositorioIntegracaoConsultaCep } from '@dominio/repositorios/integracao/integracao-cep/integracao-consulta-cep.irepositorio';
 
-        If &SDTRatMovEstoqe.RatNumero > 0
-            PGrvSDTRatMovEstoqe.Call(&SDTRatMovEstoqe)
-            PGerExtTerceiro.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero, &ErroGerExtTerceiro)
-        EndIf
-        //FIM 46360
-
-        If &SdtNF.NfContControle > 0
-            Msg('Gerando movimento para o contrato...',Status)
-            PGrvMovContrato(&SdtNF.NfContControle, &SdtNF.NfFilCod, &SdtNF.NfNumero, &SdtNF.NfDatEmis, &SdtNF.FlagContrato, 0, &MovErro)
-            If &MovErro = 1
-                Msg('Erro ao gravar a movimentação no contrato!')
-            EndIf
-
-            If &SDTEmpresa.EmpParCod1 = 14// and &FlagFilial.FilFlag6 = 3 // RGR1
-                PAtuContratoTran.Call(&SdtNF.NfFilCod, &SdtNF.NfDatEmis, &SdtNF.NfNumero)
-            EndIf
-        EndIf
-
-//        If &SDTEmpresa.EmpFlg27 = 1
-//           PAtualizaEscritaFiscal.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero, &EmpParCod1)
-//        EndIf
-
-        If &TipImp = 1
-            Msg("Imprimindo nota..",Status)
-            PImpNota.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
-        Endif
-    EndIf
-EndIf
-msg("", status)
-
-Sub 'ProcessaParcelas'
-    PGravaParc.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &LeMovEstoque.NfOpeEstCod, &SDTNF.NfNumero, &LeMovEstoque.NfPagCod, &LeMovEstoque.NfVlrTotal, &LeMovEstoque.NfQtdDev)
-    PAjustaParc.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &LeMovEstoque.NfOpeEstCod, &SDTNF.NfNumero)
-    TXMovEstoqueFaturas.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero, 'UPD', &ProcessaParcelas)
-    &Processa = 'SIM'
-    If &ProcessaParcelas = 'NAO'
-        WConfirma.Call('Total das parcelas não conferem com o total da nota. Deseja Ajustar?', &Resp)
-        If &Resp = 'SIM'
-            Do 'ProcessaParcelas'
-        Else
-            PExcMovEstoque.Call(&SDTNF.NfFilCod, &SDTNF.NfDatEmis, &SDTNF.NfNumero)
-            &Processa = 'NAO'
-        EndIf
-    EndIf
-EndSub
-
-Sub 'BuscaFlagOperacao'
-    For Each
-        Where OpeEstCod = &SDTNF.NfOpeEstCod
-        Defined By OpeEstTrf
-        &OpeEst76Flag = OpeEst76Flag
-        Exit
-    EndFor
-EndSub
-
-//93795
-Sub 'AjustarArredondamentoItem'
-    for each
-        Where NfFilCod = &NfFilCod
-        Where NfDatEmis = &NfDatEmis
-        Where NfNumero = &NfNumero
-        defined by ItemTotInf
-        ItemTotInf = ItemTotInf + &dif
-        exit
-    endfor
-Endsub
+ export interface IUsecasePegarIntegracaoEnderecoPorPaisCepDTO {
+   codigoPais: number;
+Index: src/core/dominio/usecases/residuo/residuo/atualizar-residuo.usecase.ts
+===================================================================
+--- src/core/dominio/usecases/residuo/residuo/atualizar-residuo.usecase.ts	(revision 2195)
++++ src/core/dominio/usecases/residuo/residuo/atualizar-residuo.usecase.ts	(working copy)
+@@ -13,7 +13,6 @@
+   composicaoQuimica: string;
+   xAtivo: boolean;
+   informacaoMTR: {
+-    nomeIbama: string;
+     codigoClasse: number;
+     codigoAcondicionamento: number;
+     codigoTratamento: number;
+Index: src/core/dominio/usecases/residuo/residuo/cadastrar-residuo.usecase.ts
+===================================================================
+--- src/core/dominio/usecases/residuo/residuo/cadastrar-residuo.usecase.ts	(revision 2195)
++++ src/core/dominio/usecases/residuo/residuo/cadastrar-residuo.usecase.ts	(working copy)
+@@ -12,7 +12,6 @@
+   composicaoQuimica: string;
+   xAtivo: boolean;
+   informacaoMTR: {
+-    nomeIbama: string;
+     codigoClasse: number;
+     codigoAcondicionamento: number;
+     codigoTratamento: number;
+Index: src/environments/environment.ts
+===================================================================
+--- src/environments/environment.ts	(revision 2195)
++++ src/environments/environment.ts	(working copy)
+@@ -3,7 +3,7 @@
+   demonstracao: true,
+   appVersion: 'v' + require('../../package.json').version + ' (dev)',
+   urlAutenticador: 'http://187.45.121.132:8097',
+-  urlCore: 'http://187.45.121.132:8097',
++  urlCore: 'http://localhost:1515',
+   defaultLanguage: 'pt-BR',
+   slug: 'VisionCloud',
+   storagePrefix: '@vs-cloud',
